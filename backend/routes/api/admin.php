@@ -7,10 +7,13 @@ use App\Models\User;
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\AuthController;
 
 use App\Http\Resources\UserResource;
 
 // ------------------ USERS ------------------
+
+Route::get('/user', [AuthController::class, 'user']);
 
 Route::get('/user/{id}', function ($id) {
     return new UserResource(User::findOrFail($id));

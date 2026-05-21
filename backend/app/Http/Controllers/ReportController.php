@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 use App\Models\Report;
 
 class ReportController extends Controller
@@ -12,7 +13,7 @@ class ReportController extends Controller
      */
     public function index()
     {
-        return Report::all();
+        return response(Report::all(), Response::HTTP_OK);
     }
 
     /**
@@ -20,7 +21,9 @@ class ReportController extends Controller
      */
     public function store(Request $request)
     {
-        return Report::create($request->all());
+        $report = response(Report::all(), Response::HTTP_OK);
+
+        return response($report, Response::HTTP_CREATED);
     }
 
     /**
@@ -28,7 +31,7 @@ class ReportController extends Controller
      */
     public function show(string $id)
     {
-        return Report::find($id);
+        return response(Report::find($id), Response::HTTP_OK);
     }
 
     /**
@@ -47,13 +50,9 @@ class ReportController extends Controller
 
             $report->save();
 
-            return reponse()->json([
-                "message" => "Report updated succesfully"
-            ], 200);
+            return reponse($report, Response::HTTP_CREATED);
         }else{
-            return reponse()->json([
-                "message" => "Report not found"
-            ], 400);
+            return reponse(false, Response::HTTP_NOT_FOUND);
         }
     }
 
@@ -67,13 +66,9 @@ class ReportController extends Controller
 
             $report->delete();
 
-            return reponse()->json([
-                "message" => "Report deleted succesfully"
-            ], 200);
+            return reponse($report, Response::HTTP_OK);
         }else{
-            return reponse()->json([
-                "message" => "Report not found"
-            ], 400);
+            return reponse(false, Response::HTTP_NOT_FOUND);
         }
     }
 }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Http\Requests\UserCreateRequest;
+use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
 {
@@ -12,15 +14,17 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::all();
+        return response(User::all(), Response::HTTP_OK);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserCreateRequest $request)
     {
-        return User::create($request->all());
+        $user = User::create($request->all());
+
+        return response($user, Response::HTTP_CREATED);
     }
 
     /**
@@ -28,7 +32,7 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        return User::find($id);
+        return response(User::find($id), Response::HTTP_OK);
     }
 
     /**
@@ -47,13 +51,9 @@ class UserController extends Controller
 
             $user->save();
 
-            return reponse()->json([
-                "message" => "User updated succesfully"
-            ], 200);
+            return reponse($user, Response::HTTP_CREATED);
         }else{
-            return reponse()->json([
-                "message" => "User not found"
-            ], 400);
+            return reponse(false, Response::HTTP_NOT_FOUND);
         }
     }
 
@@ -67,13 +67,9 @@ class UserController extends Controller
 
             $user->delete();
 
-            return reponse()->json([
-                "message" => "User deleted succesfully"
-            ], 200);
+            return reponse($user, Response::HTTP_OK);
         }else{
-            return reponse()->json([
-                "message" => "User not found"
-            ], 400);
+            return reponse(false, Response::HTTP_NOT_FOUND);
         }
     }
 }
