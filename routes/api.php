@@ -15,12 +15,14 @@ Route::post('/login', [AuthController::class, 'login']);
 //     ]);
 // });
 
-Route::get('/users', [UserController::class, 'all'])->middleware('auth:sanctum');
+Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::get('/users', [UserController::class, 'all']);
 
-Route::post('/users', [UserController::class, 'insert'])->middleware('auth:sanctum');
+    Route::post('/users', [UserController::class, 'insert']);
 
-Route::put('/users/{id}', [UserController::class, 'update'])->middleware('auth:sanctum');
+    Route::put('/users/{id}', [UserController::class, 'update']);
 
-Route::delete('/users/{id}', [UserController::class, 'delete'])->middleware('auth:sanctum');
+    Route::delete('/users/{id}', [UserController::class, 'delete']);
+});
 
 Route::post('/helper', [UserController::class, 'helper']);
