@@ -13,14 +13,14 @@ class AuthController extends Controller
 {
     public function login(Request $request): JsonResponse
     {
-        $loginUserData = $request->validate([
+        $credentials = $request->validate([
             'email'=>'required|string|email',
             'password'=>'required'
         ]);
         
-        $user = User::where('email',$loginUserData['email'])->first();
+        $user = User::where('email',$credentials['email'])->first();
 
-        if(!$user || !Hash::check($loginUserData['password'],$user->password))
+        if(!$user || !Hash::check($credentials['password'], $user->password))
             throw new InvalidCredentialsException();
 
         $token = $user->createToken($user->name.'-AuthToken')->plainTextToken;
