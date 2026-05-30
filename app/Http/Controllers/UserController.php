@@ -19,7 +19,9 @@ class UserController extends Controller
 
     public function insert(Request $request): JsonResponse
     {
-        User::insert($request->users);
+        foreach($request->users as $user){
+            User::create($user);
+        }
 
         return response()->json([
             'message' => "User(s) created",

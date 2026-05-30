@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\belongsTo;
 #[Fillable(['country_id', 'name'])]
 class City extends Model
 {
-    public function country(): HasOne
+    public function country(): belongsTo
     {
         return $this->belongsTo(Country::class);
     }

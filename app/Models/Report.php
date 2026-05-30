@@ -15,13 +15,13 @@ class Report extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function dangerlevel(): HasOne
+    public function danger_level(): belongsTo
     {
-        return $this->hasOne(DangerLevel::class);
+        return $this->belongsTo(DangerLevel::class);
     }
 
-    public function city(): HasOne
+    public function city(): belongsTo
     {
-        return $this->hasOne(City::class);
+        return $this->belongsTo(City::class);
     }
 }
