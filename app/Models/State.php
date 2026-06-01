@@ -4,16 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
-use Illuminate\Database\Eloquent\Relations\belongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-#[Fillable(['state_id', 'name'])]
-class City extends Model
+#[Fillable(['country_id', 'name'])]
+class State extends Model
 {
     use HasFactory;
-    
-    public function state(): belongsTo
+
+    public function countries(): HasMany
     {
-        return $this->belongsTo(State::class);
+        return $this->hasMany(Country::class);
     }
 }
