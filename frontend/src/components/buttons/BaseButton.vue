@@ -7,11 +7,18 @@ defineProps({
         default: 'default'
     }
 })
+const emit = defineEmits<{
+    click: []
+}>()
+
+function handleClick() {
+    emit('click')
+}
 </script>
 
 <template>
     <RouterLink v-if="to" :to="to">
         <button :class="['base-button', `base-button-${role}`]">{{ text }}</button>
     </RouterLink>
-    <button v-else :class="['base-button', `base-button-${role}`]">{{ text }}</button>
+    <button v-else @click="handleClick" :class="['base-button', `base-button-${role}`]" type="submit" >{{ text }}</button>
 </template>

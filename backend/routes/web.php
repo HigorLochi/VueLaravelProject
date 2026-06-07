@@ -4,22 +4,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-Route::post('/login', function (Request $request) {
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 
-    $credentials = $request->validate([
-        'email' => ['required', 'email'],
-        'password' => ['required']
-    ]);
+Route::post('/login', [AuthController::class, 'login']);
 
-    if (!Auth::attempt($credentials)) {
-        return response()->json([
-            'message' => 'Invalid credentials'
-        ], 401);
-    }
+Route::post('/logout', [AuthController::class, 'logout']);
 
-    $request->session()->regenerate();
+Route::get('/user', function (Request $request) {
+    return ['user' => $request->user()];
+})->middleware('auth:sanctum');
 
-    return response()->json([
-        'message' => 'Logged in'
-    ]);
-});
+// Route::post('/helper', [UserController::class, 'helper']);
