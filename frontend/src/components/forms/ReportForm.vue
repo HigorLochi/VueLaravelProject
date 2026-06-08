@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { BaseTitle } from '../titles/index.ts';
-import { BaseInput, BaseTextArea, BaseSelect } from '../inputs/index.ts';
-import { BaseButton } from '../buttons/index.ts';
+import { BaseTitle } from '@/components/titles/index.ts';
+import { BaseInput, BaseTextArea, BaseSelect } from '@/components/inputs/index.ts';
+import { BaseButton } from '@/components/buttons/index.ts';
 </script>
 
 <template>

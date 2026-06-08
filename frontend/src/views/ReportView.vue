@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { ReportsTable } from '../components/tables/index.ts';
+  import { ReportsTable } from '@/components/tables/index.ts';
 </script>
 
 <template>

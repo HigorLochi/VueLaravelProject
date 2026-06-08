@@ -1,7 +1,7 @@
 <script setup>
-import { BaseTitle } from '../titles/index.ts';
-import { BaseButton } from '../buttons/index.ts';
-import { IconTrash, IconPencil } from '../icons/index.ts'; 
+import { BaseTitle } from '@/components/titles/index.ts';
+import { BaseButton } from '@/components/buttons/index.ts';
+import { IconTrash, IconPencil } from '@/components/icons/index.ts'; 
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { IconEye } from '../icons/index.ts';
+import { IconEye } from '@/components/icons/index.ts';
 
 defineProps({
     

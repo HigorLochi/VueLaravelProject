@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { LoginForm } from '../components/forms/index.ts';
+import { LoginForm } from '@/components/forms/index.ts';
 </script>
 
 <template>
