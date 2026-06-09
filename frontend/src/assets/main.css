@@ -15,6 +15,9 @@ header{
 nav {
   display: flex;
   gap: 15px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
 }
 
 nav a.router-link-exact-active {
@@ -52,6 +55,7 @@ form{
 }
 
 .base-form-small{
+  min-width: 30%;
   width: 30%;
 }
 
@@ -83,6 +87,7 @@ form{
 
 .base-input{
   flex: 1;
+  width: 60%;
   color: var(--color-text);
   font-size: 15px;
   padding-left: 5px;
@@ -106,6 +111,11 @@ form{
   border: 0cap;
   border-radius: 10px;
   border-color: hsla(160, 100%, 37%, 1);
+}
+
+.base-button-right{
+  margin-right: 10px;
+  margin-left: auto;
 }
 
 .base-button-confirm{

@@ -17,7 +17,10 @@ async function handleLogin() {
         email.value,
         password.value
     ).then((response) => {
-        router.push('/reports')
+        if(response.message == "success") 
+            router.push('/reports')
+        else 
+            alert("Email or password incorrect!")
     })
 }
 </script>

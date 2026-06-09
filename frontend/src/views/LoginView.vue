@@ -4,6 +4,6 @@ import { LoginForm } from '@/components/forms/index.ts';
 
 <template>
   <main class="page-container">
-    <LoginForm size="small" />
+    <LoginForm/>
   </main>
 </template>

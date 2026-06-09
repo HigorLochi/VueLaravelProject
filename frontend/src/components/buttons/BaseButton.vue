@@ -5,6 +5,10 @@ defineProps({
     role: {
         type: String,
         default: 'default'
+    },
+    direction: {
+        type: String,
+        default: 'default'
     }
 })
 const emit = defineEmits<{
@@ -18,7 +22,9 @@ function handleClick() {
 
 <template>
     <RouterLink v-if="to" :to="to">
-        <button :class="['base-button', `base-button-${role}`]">{{ text }}</button>
+        <button :class="['base-button', `base-button-${role}`, `base-button-${direction}`]">{{ text }}</button>
     </RouterLink>
-    <button v-else @click="handleClick" :class="['base-button', `base-button-${role}`]" type="submit" >{{ text }}</button>
+    <button v-else @click="handleClick" :class="['base-button', `base-button-${role}`, `base-button-${direction}`]" type="submit" >
+        {{ text }}
+    </button>
 </template>

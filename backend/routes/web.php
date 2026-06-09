@@ -9,5 +9,3 @@ use App\Http\Controllers\UserController;
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout']);
-
-// Route::post('/helper', [UserController::class, 'helper']);

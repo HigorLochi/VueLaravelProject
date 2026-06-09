@@ -5,37 +5,45 @@ import * as authService from '@/services/authService'
 
 export const useAuthStore = defineStore('auth', () => {
 
-  const authenticated = ref(false)
   const user = ref(null)
 
   async function checkAuth() {
     try {
       const response = await authService.getUser()
 
-      authenticated.value = true
       user.value = response.data
-    }
-    catch {
-      authenticated.value = false
+    } catch {
       user.value = null
     }
   }
 
   async function login(email: string, password: string) {
-    await authService.login(email, password)
+    try {
+      const response = await authService.login(email, password)
 
-    await checkAuth()
+      user.value = response.data.user
+
+      return response.data;
+    } catch {
+      user.value = null
+
+      return false;
+    }
   }
 
   async function logout() {
-    await authService.logout()
+    try{
+      const response = await authService.logout()
 
-    authenticated.value = false
-    user.value = null
+      user.value = null
+
+      return response.data
+    } catch {
+      return false;
+    }
   }
 
   return {
-    authenticated,
     user,
     login,
     logout,

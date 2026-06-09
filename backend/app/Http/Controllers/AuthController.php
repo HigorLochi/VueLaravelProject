@@ -12,7 +12,7 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
-    public function login(Request $request)
+    public function login(Request $request) : JsonResponse
     {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
@@ -25,19 +25,16 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        return response()->json([
-            'message' => 'Logged in'
-        ]);
+        return response()->json(['message' => 'success', 'user' => ['id' => Auth::user()->id, 'name' => Auth::user()->name]]);
     }
 
-    public function logout(Request $request){
+    public function logout(Request $request) : JsonResponse
+    {
         Auth::logout();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return response()->json([
-            'message' => 'Logged out'
-        ]);
+        return response()->json(['message' => 'success', 'user' => false]);
     }
 }

@@ -9,16 +9,7 @@ use App\Http\Controllers\CityController;
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/user', function (Request $request) {
-        return ['user' => $request->user()];
-    })->middleware('auth:sanctum');
-
-    Route::get('/test-auth', function (Request $request) {
-        return response()->json([
-            'cookies' => $_COOKIE,
-            'session' => session()->all(),
-            'check' => Auth::check(),
-            'user' => Auth::id(),
-        ]);
+        return Auth::check() ? response()->json(['id' => Auth::user()->id, 'name' => Auth::user()->name]) : false;
     });
 
     Route::controller(UserController::class)->group(function () {
