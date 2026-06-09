@@ -25,7 +25,7 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        return response()->json(['message' => 'success', 'user' => ['id' => Auth::user()->id, 'name' => Auth::user()->name]]);
+        return response()->json(['id' => Auth::user()->id, 'name' => Auth::user()->name]);
     }
 
     public function logout(Request $request) : JsonResponse

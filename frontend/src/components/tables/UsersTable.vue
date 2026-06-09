@@ -3,40 +3,38 @@ import { ref, onMounted } from 'vue'
 import { BaseTitle } from '@/components/titles/index.ts';
 import { BaseButton } from '@/components/buttons/index.ts';
 import { IconTrash, IconPencil } from '@/components/icons/index.ts'; 
-import { useReportStore } from '@/stores/reportStore.ts'
+import { useUserStore } from '@/stores/userStore.ts'
 
-var reports = ref([])
-const reportStore = useReportStore()
+var users = ref([])
+const userStore = useUserStore()
 
 onMounted(() => {
-    reportStore.getAll().then((response) => {
-        reports.value = response
+    userStore.getAll().then((response) => {
+        users.value = response
     })
 })
 </script>
 
 <template>
-    <BaseTitle title="Reports List" />
-    <BaseButton text="Add Report" role="confirm" to="/report-form" />
+    <BaseTitle title="Users List" />
+    <BaseButton text="Add User" role="confirm" to="/user-form" />
     <table class="default-table">
         <thead>
             <tr>
                 <th>ID</th>
-                <th>User</th>
-                <th>Danger Level</th>
-                <th>City</th>
-                <th>Title</th>
+                <th>Name</th>
+                <th>E-mail</th>
+                <th>Created At</th>
                 <th>Editar</th>
                 <th>Excluir</th>
             </tr>
         </thead>
         <tbody>
-            <tr v-for="report in reports">
-                <td>Row</td>
-                <td>Row</td>
-                <td>Row</td>
-                <td>Row</td>
-                <td>Row</td>
+            <tr v-for="user in users">
+                <td>{{ user.id }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.created_at }}</td>
                 <td><IconPencil/></td>
                 <td><IconTrash/></td>
             </tr>

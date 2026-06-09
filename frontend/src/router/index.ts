@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { LoginView, ReportView, ReportFormView } from '@/views/index.ts'
+import { LoginView, ReportView, ReportFormView, UserView, UserFormView } from '@/views/index.ts'
 import { useAuthStore } from '@/stores/authStore'
 
 const router = createRouter({
@@ -22,6 +22,22 @@ const router = createRouter({
       path: '/report-form',
       name: 'report-form',
       component: ReportFormView,
+      meta: {
+        requiresAuth: true
+      },
+    },
+    {
+      path: '/users',
+      name: 'users',
+      component: UserView,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/user-form',
+      name: 'user-form',
+      component: UserFormView,
       meta: {
         requiresAuth: true
       }

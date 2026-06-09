@@ -8,8 +8,9 @@
   const router = useRouter()
 
   async function handleLogout() {
-    authStore.logout().then((response) => {
-      router.push('/login')
+    authStore.logout().then((success) => {
+      if(success) 
+        router.push('/login')
     })
   }
 
@@ -24,7 +25,7 @@
       <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="40" height="40" />
       <nav>
         <RouterLink v-if="authStore.user"  to="/reports">Reports</RouterLink>
-        <RouterLink v-if="authStore.user"  to="/report-form">Reports</RouterLink>
+        <RouterLink v-if="authStore.user"  to="/users">Users</RouterLink>
         <BaseButton
           v-if="authStore.user"
           @click="handleLogout"

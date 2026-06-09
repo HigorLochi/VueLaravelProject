@@ -16,8 +16,8 @@ async function handleLogin() {
     authStore.login(
         email.value,
         password.value
-    ).then((response) => {
-        if(response.message == "success") 
+    ).then((success) => {
+        if(success) 
             router.push('/reports')
         else 
             alert("Email or password incorrect!")
