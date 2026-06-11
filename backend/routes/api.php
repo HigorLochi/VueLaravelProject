@@ -13,7 +13,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     });
 
     Route::controller(UserController::class)->group(function () {
-        Route::get('/users', 'all');
+        Route::post('/users/search', 'all');
         Route::post('/users', 'insert');
         Route::put('/users/{id}', 'update');
         Route::delete('/users/{id}', 'delete');

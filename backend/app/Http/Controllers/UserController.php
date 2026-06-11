@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
- 
+
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Database\Eloquent\Collection;
@@ -9,12 +9,12 @@ use Illuminate\Support\Facades\Hash;
 
 use App\Exceptions\UserNotFoundException;
 use App\Models\User;
- 
+
 class UserController extends Controller
 {
-    public function all(): Collection
+    public function all(Request $request): Collection
     {
-        return User::all();
+        return User::where($request->where)->get();
     }
 
     public function insert(Request $request): JsonResponse

@@ -23,6 +23,10 @@ async function handleLogin() {
             alert("Email or password incorrect!")
     })
 }
+
+function exit(){
+    window.location.href = "https://www.google.com.br"
+}
 </script>
 
 <template>
@@ -35,8 +39,11 @@ async function handleLogin() {
             <PasswordInput label="Password" v-model="password" />
         </div>
         <div class="base-form-row">
-            <BaseButton text="Confirmar" role="confirm" />
-            <BaseButton text="Cancelar" role="cancel" />
+            <BaseButton :disabled="authStore.loading" text="Confirmar" role="confirm" type="submit" />
+            <BaseButton :disabled="authStore.loading" text="Cancelar" role="cancel" @click="exit" />
+        </div>
+        <div v-if="authStore.loading" class="base-form-row">
+            <VueSpinner color="green" size="20"></VueSpinner>
         </div>
     </form>
 </template>

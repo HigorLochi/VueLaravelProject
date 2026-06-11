@@ -7,11 +7,11 @@ export const useUserStore = defineStore('user', {
     }),
 
     actions: {
-        async getAll() {
+        async getAll(where: Object) {
             this.loading = true;
 
             try {
-                const response = await userService.get();
+                const response = await userService.get(where);
 
                 if (response.status === 200) {
                     return response.data;

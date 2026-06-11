@@ -41,6 +41,14 @@ const router = createRouter({
       meta: {
         requiresAuth: true
       }
+    },
+    {
+      path: '/user-form/:id',
+      name: 'user-form-edit',
+      component: UserFormView,
+      meta: {
+        requiresAuth: true
+      }
     }
   ]
 })

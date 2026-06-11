@@ -24,8 +24,8 @@
     <div class="wrapper">
       <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="40" height="40" />
       <nav>
-        <RouterLink v-if="authStore.user"  to="/reports">Reports</RouterLink>
-        <RouterLink v-if="authStore.user"  to="/users">Users</RouterLink>
+        <RouterLink v-if="authStore.user" to="/reports">Reports</RouterLink>
+        <RouterLink v-if="authStore.user" to="/users">Users</RouterLink>
         <BaseButton
           v-if="authStore.user"
           @click="handleLogout"

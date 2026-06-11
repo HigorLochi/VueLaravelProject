@@ -5,14 +5,14 @@ import { BaseButton } from '@/components/buttons/index.ts';
 </script>
 
 <template>
-    <form :class="['base-form', `base-form-medium`]" action="">
+    <form :class="['base-form', `base-form-large`]" action="">
         <BaseTitle title="Report Form" />
         <div class="base-form-row">
             <BaseInput label="Name" />
         </div>
         <div class="base-form-row">
-            <BaseInput label="E-mail" />
-            <PasswordInput label="Password"/>
+            <BaseInput modelValue="" label="E-mail" />
+            <PasswordInput modelValue="" label="Password"/>
         </div>
         <div class="base-form-row">
             <BaseButton text="Confirmar" role="confirm" />

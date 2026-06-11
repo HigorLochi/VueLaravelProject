@@ -1,7 +1,7 @@
 import api from './api'
 
-export async function get() {
-    return api.get('/api/users')
+export async function get(where: Object) {
+    return api.post('/api/users/search', {where : where})
 }
 
 export async function create(service: object) {

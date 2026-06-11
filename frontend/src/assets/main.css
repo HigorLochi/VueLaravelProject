@@ -24,12 +24,14 @@ nav a.router-link-exact-active {
   color: var(--color-text);
 }
 
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
+nav a {
+  color: var(--vt-c-text-green-1);
   transition: 0.4s;
-  padding: 3px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
 .page-container {
@@ -49,7 +51,6 @@ form{
 .base-form{
   display: grid;
   gap: 1rem;
-  margin-top: 100px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -57,10 +58,12 @@ form{
 .base-form-small{
   min-width: 30%;
   width: 30%;
+  margin-top: 100px;
 }
 
 .base-form-large{
   width: 100%;
+  margin-top: 20px;
 }
 
 .base-title{
@@ -100,7 +103,7 @@ form{
 
 .base-input:focus {
   outline: none;
-  border-color: hsla(160, 100%, 37%, 1);
+  border-color: var(--vt-c-text-green-1);
 }
 
 .base-button{
@@ -110,7 +113,7 @@ form{
   min-height: 30px;
   border: 0cap;
   border-radius: 10px;
-  border-color: hsla(160, 100%, 37%, 1);
+  border-color: var(--vt-c-text-green-1);
 }
 
 .base-button-right{
@@ -120,7 +123,14 @@ form{
 
 .base-button-confirm{
   color: white;
-  background-color: hsla(160, 100%, 37%, 1);
+  background-color: var(--vt-c-text-green-1);
+}
+
+.base-button:disabled,
+.base-button[disabled]{
+  border: 1px solid #999999 !important;
+  background-color: #cccccc !important;
+  color: #666666 !important;
 }
 
 .default-table{
@@ -133,6 +143,10 @@ form{
   width: 100%;
   border-spacing: 20px;
   border-collapse: separate;
+}
+
+.default-table thead{
+  color: var(--vt-c-text-green-1);
 }
 
 .default-table tr{
