@@ -4,8 +4,13 @@ const props = defineProps({
         type: String,
         default: 'text'
     },
+    autocomplete: {
+        type: String,
+        default: "off"
+    },
     label: String,
     placeholder: String,
+    
 })
 
 const model = defineModel<any>()
@@ -21,5 +26,6 @@ const emit = defineEmits(['update:modelValue'])
         :type="type"
         :value="modelValue"
         :placeholder="placeholder"
+        :autocomplete="autocomplete"
     ></input>
 </template>

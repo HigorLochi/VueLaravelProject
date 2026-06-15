@@ -5,6 +5,7 @@ import { BaseTitle } from '@/components/titles/index.ts';
 import { BaseInput, PasswordInput } from '@/components/inputs/index.ts';
 import { BaseButton } from '@/components/buttons/index.ts';
 import { useAuthStore } from '@/stores/authStore.ts'
+import Swal from 'sweetalert2'
 
 const router = useRouter()
 const authStore = useAuthStore()
@@ -19,8 +20,13 @@ async function handleLogin() {
     ).then((success) => {
         if(success) 
             router.push('/reports')
-        else 
-            alert("Email or password incorrect!")
+        else {
+            Swal.fire({
+                title: 'Error',
+                text: 'Invalid credentials!',
+                icon: 'error'
+            })
+        }
     })
 }
 
@@ -33,10 +39,10 @@ function exit(){
     <form :class="['base-form', `base-form-small`]" @submit.prevent="handleLogin" action="">
         <BaseTitle title="Acess Panel" />
         <div class="base-form-row">
-            <BaseInput label="Login" v-model="email" />
+            <BaseInput label="Login" v-model="email" autocomplete="login-email" />
         </div>
         <div class="base-form-row">
-            <PasswordInput label="Password" v-model="password" />
+            <PasswordInput label="Password" v-model="password" autocomplete="login-password" />
         </div>
         <div class="base-form-row">
             <BaseButton :disabled="authStore.loading" text="Confirmar" role="confirm" type="submit" />

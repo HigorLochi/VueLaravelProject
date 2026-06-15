@@ -1,6 +1,5 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { BaseTitle } from '@/components/titles/index.ts';
 import { BaseInput } from '@/components/inputs/index.ts';
 import { BaseButton } from '@/components/buttons/index.ts';
 import { IconTrash, IconPencil } from '@/components/icons/index.ts'; 
@@ -30,8 +29,6 @@ onMounted(() => {
 </script>
 
 <template>
-    <BaseTitle title="Users List" />
-    <BaseButton text="Add User" role="confirm" to="/user-form" />
     <form :class="['base-form', `base-form-large`]" action="">
         <div class="base-form-row">
             <BaseInput v-model="name" label="Name" />

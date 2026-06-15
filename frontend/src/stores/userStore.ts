@@ -25,13 +25,31 @@ export const useUserStore = defineStore('user', {
             }
         },
 
-        async create(user: object) {
+        async getById(id: Number) {
+            this.loading = true;
+
+            try {
+                const response = await userService.getById(id);
+
+                if (response.status === 200) {
+                    return response.data;
+                }
+
+                return {};
+            } catch (error) {
+                return {};
+            } finally {
+                this.loading = false;
+            }
+        },
+
+        async create(users: Array<Object>) {
             this.loading = true
             try {
-                await userService.create(user)
+                await userService.create(users)
 
                 return true
-            } catch {
+            } catch(e) {
                 return false
             } finally {
                 this.loading = false

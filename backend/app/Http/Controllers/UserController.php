@@ -17,6 +17,10 @@ class UserController extends Controller
         return User::where($request->where)->get();
     }
 
+    public function getbyid(Request $request, string $id): User{
+        return User::find($id);
+    }
+
     public function insert(Request $request): JsonResponse
     {
         foreach($request->users as $user){

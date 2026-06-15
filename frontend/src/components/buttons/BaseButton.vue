@@ -32,7 +32,10 @@ function handleClick() {
     <RouterLink v-if="to" :to="to">
         <button :class="['base-button', `base-button-${role}`, `base-button-${direction}`]">{{ text }}</button>
     </RouterLink>
-    <button v-else @click="handleClick" :class="['base-button', `base-button-${role}`, `base-button-${direction}`]" :disabled="disabled" :type="type" >
+    <button v-else @click="handleClick" :class="['base-button', `base-button-${role}`, `base-button-${direction}`]" 
+        :disabled="disabled" 
+        :type="type" 
+    >
         {{ text }}
     </button>
 </template>

@@ -14,6 +14,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::controller(UserController::class)->group(function () {
         Route::post('/users/search', 'all');
+        Route::get('/users/{id}', 'getbyid');
         Route::post('/users', 'insert');
         Route::put('/users/{id}', 'update');
         Route::delete('/users/{id}', 'delete');
