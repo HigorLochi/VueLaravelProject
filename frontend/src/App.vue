@@ -2,16 +2,21 @@
   import { onMounted } from 'vue'
   import { useRouter, RouterLink, RouterView } from 'vue-router'
   import { useAuthStore } from '@/stores/authStore'
-  import { BaseButton } from '@/components/buttons/index.ts';
+  import Alert from '@/services/alert'
 
   const authStore = useAuthStore()
   const router = useRouter()
 
   async function handleLogout() {
-    authStore.logout().then((success) => {
-      if(success) 
-        router.push('/login')
+    Alert.question("Do you confirm the logout?", "Yes", "No").then((response) => {
+      if (response.isConfirmed) {
+        authStore.logout().then((success) => {
+          if(success) 
+            router.push('/login')
+        })
+      }
     })
+    
   }
 
   onMounted(async () => {
@@ -26,13 +31,15 @@
       <nav>
         <RouterLink v-if="authStore.user" to="/reports">Reports</RouterLink>
         <RouterLink v-if="authStore.user" to="/users">Users</RouterLink>
-        <BaseButton
+        
+      </nav>
+      <Button
           v-if="authStore.user"
           @click="handleLogout"
-          text="Logout"
-          direction="right"
+          label="Logout"
+          iconPos="right"
+          severity="contrast"
         />
-      </nav>
     </div>
   </header>
 

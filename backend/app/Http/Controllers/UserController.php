@@ -36,7 +36,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
 
-        if($user) $user->updateOrFail($request->user);
+        if($user) $user->update($request->all());
         else throw new UserNotFoundException();
 
         return response()->json([
@@ -48,7 +48,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
 
-        if($user) $user->destroy($request->user);
+        if($user) $user->delete();
         else throw new UserNotFoundException();
 
         return response()->json([

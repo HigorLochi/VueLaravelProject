@@ -3,9 +3,8 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { BaseTitle } from '@/components/titles/index.ts';
 import { BaseInput, PasswordInput } from '@/components/inputs/index.ts';
-import { BaseButton } from '@/components/buttons/index.ts';
 import { useAuthStore } from '@/stores/authStore.ts'
-import Swal from 'sweetalert2'
+import Alert from '@/services/alert'
 
 const router = useRouter()
 const authStore = useAuthStore()
@@ -21,11 +20,7 @@ async function handleLogin() {
         if(success) 
             router.push('/reports')
         else {
-            Swal.fire({
-                title: 'Error',
-                text: 'Invalid credentials!',
-                icon: 'error'
-            })
+            Alert.warning("Invalid credentials!")
         }
     })
 }
@@ -45,8 +40,8 @@ function exit(){
             <PasswordInput label="Password" v-model="password" autocomplete="login-password" />
         </div>
         <div class="base-form-row">
-            <BaseButton :disabled="authStore.loading" text="Confirmar" role="confirm" type="submit" />
-            <BaseButton :disabled="authStore.loading" text="Cancelar" role="cancel" @click="exit" />
+            <Button :disabled="authStore.loading" label="Confirmar" type="submit" />
+            <Button :disabled="authStore.loading" label="Cancelar" severity="contrast" @click="exit" />
         </div>
         <div v-if="authStore.loading" class="base-form-row">
             <VueSpinner color="green" size="20"></VueSpinner>

@@ -4,9 +4,8 @@ import { useRoute, useRouter } from 'vue-router'
 import { type User } from '@/interfaces/IUser';
 import { BaseTitle } from '@/components/titles/index.ts';
 import { BaseInput, PasswordInput } from '@/components/inputs/index.ts';
-import { BaseButton } from '@/components/buttons/index.ts';
 import { useUserStore } from '@/stores/userStore.ts'
-import Swal from 'sweetalert2'
+import Alert from '@/services/alert'
 
 const route = useRoute()
 const router = useRouter()
@@ -28,25 +27,31 @@ async function getUser() {
     }
 }
 
+async function action(){
+    if(user.value.id == 0) await save()
+    else await update()
+}
+
 async function save() {
     userStore.create([user.value]).then((success) => {
         if(success) {
-            Swal.mixin({
-                timer: 3000,
-                timerProgressBar: true,
-            }).fire({
-                icon: 'success',
-                title: 'Success',
-                text: 'User created successfully!',
-            }).then(() => {
-                router.push('/reports')
+            Alert.success("User created sucessfully!").then(() => {
+                router.push('/users')
             })
         } else {
-            Swal.fire({
-                title: 'Error',
-                text: 'An error has occurred!',
-                icon: 'error'
+            Alert.error("An error has occurred!")
+        }
+    })
+}
+
+async function update() {
+    userStore.update(user.value).then((success) => {
+        if(success) {
+            Alert.success("User updated sucessfully!").then(() => {
+                router.push('/users')
             })
+        } else {
+            Alert.error("An error has occurred!")
         }
     })
 }
@@ -57,7 +62,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <form :class="['base-form', `base-form-large`]" @submit.prevent="save" action="">
+    <form :class="['base-form', `base-form-large`]" @submit.prevent="action" action="">
         <BaseTitle title="User Form" />
         <div class="base-form-row">
             <BaseInput label="Name" v-model="user.name" />
@@ -67,8 +72,11 @@ onMounted(() => {
             <PasswordInput v-if="!iduser" label="Password" v-model="user.password" />
         </div>
         <div class="base-form-row">
-            <BaseButton :disabled="userStore.loading" text="Confirmar" role="confirm" type="submit" />
-            <BaseButton :disabled="userStore.loading" text="Cancelar" role="cancel" to="/users" />
+            <Button :disabled="userStore.loading" label="Confirmar" type="submit" />
+            <Button :disabled="userStore.loading" label="Cancelar" severity="contrast" to="/users" />
+        </div>
+        <div v-if="userStore.loading" class="base-form-row">
+            <VueSpinner color="green" size="20"></VueSpinner>
         </div>
     </form>
 </template>

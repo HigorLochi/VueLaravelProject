@@ -1,11 +1,12 @@
 <script setup>
 import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+import Alert from '@/services/alert'
 import { BaseInput } from '@/components/inputs/index.ts';
-import { BaseButton } from '@/components/buttons/index.ts';
-import { IconTrash, IconPencil } from '@/components/icons/index.ts'; 
 import { useUserStore } from '@/stores/userStore.ts'
-
 import dayjs from 'dayjs'
+
+const router = useRouter()
 
 var users = ref([])
 const name = ref('')
@@ -23,6 +24,23 @@ async function search() {
     })
 }
 
+async function goToUpdatePage(id){
+    router.push("/user-form/" + id)
+}
+
+async function deleteUser(id){
+    Alert.question("Do you want to delete the user?", "Yes", "No").then((response) => {
+      if (response.isConfirmed) {
+        userStore.destroy(id).then((success) => {
+            if(success) Alert.success("User deleted!")
+            else Alert.error("An error has ocurred!")
+
+            router.go()
+        })
+      }
+    })
+}
+
 onMounted(() => {
     search()
 })
@@ -33,7 +51,7 @@ onMounted(() => {
         <div class="base-form-row">
             <BaseInput v-model="name" label="Name" />
             <BaseInput v-model="email" label="E-mail" />
-            <BaseButton :disabled="userStore.loading" @click="search" text="Search" role="confirm" />
+            <Button label="Search" :loading="userStore.loading" @click="search()" />
         </div>
         <div v-if="userStore.loading" class="base-form-row">
             <VueSpinner color="green" size="20"></VueSpinner>
@@ -56,8 +74,8 @@ onMounted(() => {
                 <td>{{ user.name }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ dayjs(user.created_at).format('YYYY/MM/DD') }}</td>
-                <td><a :href="`/user-form/${user.id}`"><IconPencil/></a></td>
-                <td><a><IconTrash/></a></td>
+                <td><Button icon="pi pi-pencil" @click="goToUpdatePage(user.id)" /></td>
+                <td><Button icon="pi pi-trash" severity="danger" @click="deleteUser(user.id)" /></td>
             </tr>
         </tbody>
     </table>

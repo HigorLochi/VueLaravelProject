@@ -12,14 +12,10 @@ export async function create(users: Array<Object>) {
     return api.post('/api/users', {users: users})
 }
 
-export async function update(user: object) {
-    return api.put('/api/users', user)
+export async function update(user: any) {
+    return api.put(`/api/users/${user.id}`, user)
 }
 
 export async function destroy(id: Number) {
-    return api.delete('/api/users', {
-        params: {
-            id: id
-        }
-    })
+    return api.delete(`/api/users/${id}`)
 }

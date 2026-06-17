@@ -16,7 +16,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <BaseTitle title="Reports List" />
+    <BaseTitle title="Report List" />
     <BaseButton text="Add Report" role="confirm" to="/report-form" />
     <table class="default-table">
         <thead>
