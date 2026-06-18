@@ -1,15 +1,19 @@
 import api from './api'
 
-export async function get() {
-    return api.get('/api/cities')
+export async function get(where: Object) {
+    return api.post('/api/cities/search', {where : where})
 }
 
-export async function create(city: object) {
-    return api.post('/api/cities', city)
+export async function getById(id: Number) {
+    return api.get(`/api/cities/${id}`)
 }
 
-export async function update(city: object) {
-    return api.put('/api/cities', city)
+export async function create(report: object) {
+    return api.post('/api/cities', report)
+}
+
+export async function update(report: object) {
+    return api.put('/api/cities', report)
 }
 
 export async function destroy(id: Number) {

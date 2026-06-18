@@ -1,9 +1,8 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import Alert from '@/services/alert'
-import { BaseInput } from '@/components/inputs/index.ts';
 import { useUserStore } from '@/stores/userStore.ts'
+import Alert from '@/services/alert'
 import dayjs from 'dayjs'
 
 const router = useRouter()
@@ -49,34 +48,35 @@ onMounted(() => {
 <template>
     <form :class="['base-form', `base-form-large`]" action="">
         <div class="base-form-row">
-            <BaseInput v-model="name" label="Name" />
-            <BaseInput v-model="email" label="E-mail" />
-            <Button label="Search" :loading="userStore.loading" @click="search()" />
-        </div>
-        <div v-if="userStore.loading" class="base-form-row">
-            <VueSpinner color="green" size="20"></VueSpinner>
+            <FloatLabel>
+                <InputText id="name" type="text" v-model="name" fluid />
+                <label for="name">Name</label>
+            </FloatLabel>
+            <FloatLabel>
+                <InputText id="email" type="text" v-model="email" fluid />
+                <label for="email">E-mail</label>
+            </FloatLabel>
+            <Button label=" " icon="pi pi-search" severity="success" rounded aria-label="Search" :loading="userStore.loading" @click="search()" />
         </div>
     </form>
-    <table v-if="!userStore.loading" class="default-table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>E-mail</th>
-                <th>Created At</th>
-                <th>Editar</th>
-                <th>Excluir</th>
-            </tr>
-        </thead>
-        <tbody >
-            <tr v-for="user in users">
-                <td>{{ user.id }}</td>
-                <td>{{ user.name }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ dayjs(user.created_at).format('YYYY/MM/DD') }}</td>
-                <td><Button icon="pi pi-pencil" @click="goToUpdatePage(user.id)" /></td>
-                <td><Button icon="pi pi-trash" severity="danger" @click="deleteUser(user.id)" /></td>
-            </tr>
-        </tbody>
-    </table>
+    <DataTable :value="users" tableStyle="min-width: 50rem;border-radius:10px">
+        <Column field="id" header="ID"></Column>
+        <Column field="name" header="Name"></Column>
+        <Column field="email" header="E-mail"></Column>
+        <Column field="created_at" header="Created At" dataType="date">
+            <template #body="{ data }">
+                {{ dayjs(data.created_at).format('YYYY/MM/DD') }}
+            </template>
+        </Column>
+        <Column header="Edit">
+            <template #body="{ data }">
+                <Button icon="pi pi-pencil" @click="goToUpdatePage(data.id)" />
+            </template>
+        </Column>
+        <Column header="Delete">
+            <template #body="{ data }">
+                <Button icon="pi pi-trash" severity="danger" @click="deleteUser(data.id)" />
+            </template>
+        </Column>
+    </DataTable>
 </template>

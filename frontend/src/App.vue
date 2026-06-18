@@ -3,6 +3,7 @@
   import { useRouter, RouterLink, RouterView } from 'vue-router'
   import { useAuthStore } from '@/stores/authStore'
   import Alert from '@/services/alert'
+  import { menuItems } from '@/variables/menuItems'
 
   const authStore = useAuthStore()
   const router = useRouter()
@@ -26,21 +27,27 @@
 
 <template>
   <header>
-    <div class="wrapper">
-      <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="40" height="40" />
-      <nav>
-        <RouterLink v-if="authStore.user" to="/reports">Reports</RouterLink>
-        <RouterLink v-if="authStore.user" to="/users">Users</RouterLink>
-        
-      </nav>
-      <Button
-          v-if="authStore.user"
-          @click="handleLogout"
+    <Menubar v-if="authStore.user" :model="menuItems">
+      <template #item="{ item, props, hasSubmenu }"> 
+        <router-link v-if="item.route" v-slot="{ href, navigate }" :to="item.route" custom> 
+          <a v-ripple :href="href" v-bind="props.action" @click="navigate"> 
+            <span :class="item.icon" /> <span>{{ item.label }}</span> 
+          </a> 
+        </router-link> 
+        <a v-else v-ripple :href="item.url" :target="item.target" v-bind="props.action"> 
+          <span :class="item.icon" /> <span>{{ item.label }}</span> 
+          <span v-if="hasSubmenu" class="pi pi-fw pi-angle-down" /> 
+        </a> 
+      </template>
+      <template #end>
+        <Button
           label="Logout"
-          iconPos="right"
+          icon="pi pi-sign-out"
           severity="contrast"
+          @click="handleLogout"
         />
-    </div>
+      </template>
+    </Menubar>
   </header>
 
   <RouterView />

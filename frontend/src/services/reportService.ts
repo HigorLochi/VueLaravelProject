@@ -1,7 +1,11 @@
 import api from './api'
 
-export async function get() {
-    return api.get('/api/reports')
+export async function get(where: Object) {
+    return api.post('/api/reports/search', {where : where})
+}
+
+export async function getById(id: Number) {
+    return api.get(`/api/reports/${id}`)
 }
 
 export async function create(report: object) {

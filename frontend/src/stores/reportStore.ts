@@ -7,11 +7,11 @@ export const useReportStore = defineStore('report', {
     }),
 
     actions: {
-        async getAll() {
+        async getAll(where: Object) {
             this.loading = true;
 
             try {
-                const response = await reportService.get();
+                const response = await reportService.get(where);
 
                 if (response.status === 200) {
                     return response.data;
@@ -25,13 +25,31 @@ export const useReportStore = defineStore('report', {
             }
         },
 
-        async create(report: object) {
+        async getById(id: Number) {
+            this.loading = true;
+
+            try {
+                const response = await reportService.getById(id);
+
+                if (response.status === 200) {
+                    return response.data;
+                }
+
+                return {};
+            } catch (error) {
+                return {};
+            } finally {
+                this.loading = false;
+            }
+        },
+
+        async create(reports: Array<Object>) {
             this.loading = true
             try {
-                await reportService.create(report)
+                await reportService.create(reports)
 
                 return true
-            } catch {
+            } catch(e) {
                 return false
             } finally {
                 this.loading = false

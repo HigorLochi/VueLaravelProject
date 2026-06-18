@@ -2,7 +2,6 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { BaseTitle } from '@/components/titles/index.ts';
-import { BaseInput, PasswordInput } from '@/components/inputs/index.ts';
 import { useAuthStore } from '@/stores/authStore.ts'
 import Alert from '@/services/alert'
 
@@ -33,18 +32,21 @@ function exit(){
 <template>
     <form :class="['base-form', `base-form-small`]" @submit.prevent="handleLogin" action="">
         <BaseTitle title="Acess Panel" />
-        <div class="base-form-row">
-            <BaseInput label="Login" v-model="email" autocomplete="login-email" />
+        <div :class="['base-form-row', `base-form-row-center`]">    
+            <FloatLabel>
+                <InputText id="email" type="text" v-model="email" fluid />
+                <label for="email">Username</label>
+            </FloatLabel>
         </div>
-        <div class="base-form-row">
-            <PasswordInput label="Password" v-model="password" autocomplete="login-password" />
+        <div :class="['base-form-row', `base-form-row-center`]">
+            <FloatLabel>
+                <Password id="password" type="text" v-model="password" toggleMask fluid />
+                <label for="password">Password</label>
+            </FloatLabel>
         </div>
-        <div class="base-form-row">
-            <Button :disabled="authStore.loading" label="Confirmar" type="submit" />
-            <Button :disabled="authStore.loading" label="Cancelar" severity="contrast" @click="exit" />
-        </div>
-        <div v-if="authStore.loading" class="base-form-row">
-            <VueSpinner color="green" size="20"></VueSpinner>
+        <div :class="['base-form-row', `base-form-row-center`]">
+            <Button :loading="authStore.loading" label="Confirmar" type="submit" />
+            <Button :loading="authStore.loading" label="Cancelar" severity="contrast" @click="exit" />
         </div>
     </form>
 </template>

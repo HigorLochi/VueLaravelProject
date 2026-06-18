@@ -1,12 +1,6 @@
 @import './base.css';
 @import 'primeicons/primeicons.css';
 
-header{
-  padding: 10px;
-  background-color: var(--vt-c-black-soft);
-  color: var(--vt-c-text-dark-2);
-}
-
 .wrapper {
   display: flex;
   align-items: center;
@@ -54,6 +48,7 @@ form{
   gap: 1rem;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 15px;
 }
 
 .base-form-small{
@@ -70,16 +65,29 @@ form{
 .base-title{
   text-align: center;
   margin-top: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   color: var(--vt-c-text-dark-2);
 }
 
 .base-form-row {
   display: flex;
   gap: 1rem;
-  padding: 2px;
+  padding: 10px;
+}
+
+.base-form-row-center{
   justify-content: center;
   align-items: center;
+}
+
+.base-form-row-left{
+  justify-content: left;
+  align-items: left;
+}
+
+.base-form-row-right{
+  justify-content: right;
+  align-items: right;
 }
 
 .base-input-label{

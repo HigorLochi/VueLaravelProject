@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CityController;
+use App\Http\Controllers\CountryController;
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/user', function (Request $request) {
@@ -21,16 +22,26 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     });
 
     Route::controller(ReportController::class)->group(function () {
-        Route::get('/reports', 'all');
+        Route::post('/reports/search', 'all');
+        Route::get('/reports/{id}', 'getbyid');
         Route::post('/reports', 'insert');
         Route::put('/reports/{id}', 'update');
         Route::delete('/reports/{id}', 'delete');
     });
 
     Route::controller(CityController::class)->group(function () {
-        Route::get('/cities', 'all');
+        Route::post('/cities/search', 'all');
+        Route::get('/cities/{id}', 'getbyid');
         Route::post('/cities', 'insert');
         Route::put('/cities/{id}', 'update');
         Route::delete('/cities/{id}', 'delete');
+    });
+
+    Route::controller(CountryController::class)->group(function () {
+        Route::post('/countries/search', 'all');
+        Route::get('/countries/{id}', 'getbyid');
+        Route::post('/countries', 'insert');
+        Route::put('/countries/{id}', 'update');
+        Route::delete('/countries/{id}', 'delete');
     });
 });

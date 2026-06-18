@@ -12,17 +12,19 @@ use App\Models\City;
 
 class CityController extends Controller
 {
-    public function all(): Collection
+    public function all(Request $request): Collection
     {
-        $city = new City();
-        
-        return $city->with("country")->get();
+        return City::where($request->where)->get();
+    }
+
+    public function getbyid(Request $request, string $id): City{
+        return City::find($id);
     }
 
     public function insert(Request $request): JsonResponse
     {
         foreach($request->cities as $city){
-            City::create($city);
+            City::create(city);
         }
 
         return response()->json([
@@ -34,7 +36,7 @@ class CityController extends Controller
     {
         $city = City::find($id);
 
-        if($city) $city->updateOrFail($request->city);
+        if($city) $city->update($request->all());
         else throw new CityNotFoundException();
 
         return response()->json([
@@ -46,7 +48,7 @@ class CityController extends Controller
     {
         $city = City::find($id);
 
-        if($city) $city->destroy($request->city);
+        if($city) $city->delete();
         else throw new CityNotFoundException();
 
         return response()->json([

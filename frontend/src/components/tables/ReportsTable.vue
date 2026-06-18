@@ -1,7 +1,5 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { BaseTitle } from '@/components/titles/index.ts';
-import { BaseButton } from '@/components/buttons/index.ts';
 import { IconTrash, IconPencil } from '@/components/icons/index.ts'; 
 import { useReportStore } from '@/stores/reportStore.ts'
 
@@ -16,8 +14,6 @@ onMounted(() => {
 </script>
 
 <template>
-    <BaseTitle title="Report List" />
-    <BaseButton text="Add Report" role="confirm" to="/report-form" />
     <table class="default-table">
         <thead>
             <tr>

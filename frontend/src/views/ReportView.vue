@@ -1,9 +1,19 @@
 <script setup lang="ts">
-  import { ReportsTable } from '@/components/tables/index.ts';
+import { useRouter } from 'vue-router'
+import { ReportsTable } from '@/components/tables/index.ts';
+import { BaseTitle } from '@/components/titles/index.ts';
+
+const router = useRouter()
+
+async function goToForm() {
+  router.push("/report-form")
+}
 </script>
 
 <template>
   <main class="page-container">
+    <BaseTitle title="User List" />
+    <Button label="Add User" @click="goToForm()" />
     <ReportsTable/>
   </main>
 </template>

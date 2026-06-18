@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { LoginView, ReportView, ReportFormView, UserView, UserFormView } from '@/views/index.ts'
+import { LoginView, ReportView, ReportFormView, UserView, UserFormView, AboutView } from '@/views/index.ts'
 import { useAuthStore } from '@/stores/authStore'
 
 const router = createRouter({
@@ -49,6 +49,11 @@ const router = createRouter({
       meta: {
         requiresAuth: true
       }
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: AboutView
     }
   ]
 })

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
- 
+
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Database\Eloquent\Collection;
@@ -9,14 +9,16 @@ use Illuminate\Support\Facades\Hash;
 
 use App\Exceptions\ReportNotFoundException;
 use App\Models\Report;
- 
+
 class ReportController extends Controller
 {
-    public function all(): Collection
+    public function all(Request $request): Collection
     {
-        $report = new Report();
-        
-        return $report->with("user", "danger_level", "city.country")->get();
+        return Report::where($request->where)->get();
+    }
+
+    public function getbyid(Request $request, string $id): Report{
+        return Report::find($id);
     }
 
     public function insert(Request $request): JsonResponse
@@ -34,7 +36,7 @@ class ReportController extends Controller
     {
         $report = Report::find($id);
 
-        if($report) $report->updateOrFail($request->report);
+        if($report) $report->update($request->all());
         else throw new ReportNotFoundException();
 
         return response()->json([
@@ -46,7 +48,7 @@ class ReportController extends Controller
     {
         $report = Report::find($id);
 
-        if($report) $report->destroy($request->report);
+        if($report) $report->delete();
         else throw new ReportNotFoundException();
 
         return response()->json([

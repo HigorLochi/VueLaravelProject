@@ -3,7 +3,6 @@ import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { type User } from '@/interfaces/IUser';
 import { BaseTitle } from '@/components/titles/index.ts';
-import { BaseInput, PasswordInput } from '@/components/inputs/index.ts';
 import { useUserStore } from '@/stores/userStore.ts'
 import Alert from '@/services/alert'
 
@@ -56,6 +55,10 @@ async function update() {
     })
 }
 
+async function goToUsers(){
+    router.push("/users")
+}
+
 onMounted(() => {
     getUser()
 })
@@ -65,18 +68,24 @@ onMounted(() => {
     <form :class="['base-form', `base-form-large`]" @submit.prevent="action" action="">
         <BaseTitle title="User Form" />
         <div class="base-form-row">
-            <BaseInput label="Name" v-model="user.name" />
+            <FloatLabel>
+                <InputText id="name" type="text" v-model="user.name" fluid />
+                <label for="name">Name</label>
+            </FloatLabel>
         </div>
         <div class="base-form-row">
-            <BaseInput label="E-mail" v-model="user.email" />
-            <PasswordInput v-if="!iduser" label="Password" v-model="user.password" />
+            <FloatLabel>
+                <InputText id="email" type="text" v-model="user.email" fluid />
+                <label for="email">E-mail</label>
+            </FloatLabel>
+            <FloatLabel v-if="!iduser">
+                <Password id="password" type="text" v-model="user.password" fluid />
+                <label for="password">Password</label>
+            </FloatLabel>
         </div>
-        <div class="base-form-row">
-            <Button :disabled="userStore.loading" label="Confirmar" type="submit" />
-            <Button :disabled="userStore.loading" label="Cancelar" severity="contrast" to="/users" />
-        </div>
-        <div v-if="userStore.loading" class="base-form-row">
-            <VueSpinner color="green" size="20"></VueSpinner>
+        <div :class="['base-form-row', `base-form-row-center`]">
+            <Button :loading="userStore.loading" label="Confirmar" type="submit" />
+            <Button :loading="userStore.loading" label="Cancelar" severity="contrast" @click="goToUsers" />
         </div>
     </form>
 </template>
