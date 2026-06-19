@@ -8,51 +8,51 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Hash;
 
 use App\Exceptions\CityNotFoundException;
-use App\Models\City;
+use App\Models\DangerLevel;
 
-class CityController extends Controller
+class DangerLevelController extends Controller
 {
     public function all(Request $request): Collection
     {
-        return City::with('country')->where($request->where)->get();
+        return DangerLevel::where($request->where)->get();
     }
 
-    public function getbyid(Request $request, string $id): City{
-        return City::with('country')->find($id);
+    public function getbyid(Request $request, string $id): DangerLevel{
+        return DangerLevel::find($id);
     }
 
     public function insert(Request $request): JsonResponse
     {
-        foreach($request->cities as $city){
-            City::create(city);
+        foreach($request->levels as $level){
+            DangerLevel::create(level);
         }
 
         return response()->json([
-            'message' => "City(es) created",
+            'message' => "Level(s) created",
         ]);
     }
 
     public function update(Request $request, string $id): JsonResponse
     {
-        $city = City::find($id);
+        $level = DangerLevel::find($id);
 
-        if($city) $city->update($request->all());
+        if($level) $level->update($request->all());
         else throw new CityNotFoundException();
 
         return response()->json([
-            'message' => "City updated",
+            'message' => "Level updated",
         ]);
     }
 
     public function delete(Request $request, string $id): JsonResponse
     {
-        $city = City::find($id);
+        $level = DangerLevel::find($id);
 
-        if($city) $city->delete();
+        if($level) $level->delete();
         else throw new CityNotFoundException();
 
         return response()->json([
-            'message' => "City deleted",
+            'message' => "Level deleted",
         ]);
     }
 }

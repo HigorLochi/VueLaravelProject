@@ -21,6 +21,10 @@
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
 
   --vt-c-text-green-1: hsla(160, 100%, 37%, 1);
+
+  --vt-c-primevue-black: #27272A;
+  --vt-c-primevue-black-strong: #111113;
+  --vt-c-primevue-green: #34D399;
 }
 
 /* semantic color variables for this project */
@@ -40,7 +44,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-background: var(--vt-c-black);
+    --color-background: var(--vt-c-primevue-black-strong);
     --color-background-soft: var(--vt-c-black-soft);
     --color-background-mute: var(--vt-c-black-mute);
 
@@ -62,7 +66,7 @@
 
 body {
   min-height: 100vh;
-  color: var(--color-text);
+  color: var(--vt-c-white);
   background: var(--color-background);
   transition:
     color 0.5s,

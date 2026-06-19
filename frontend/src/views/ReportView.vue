@@ -13,7 +13,7 @@ async function goToForm() {
 <template>
   <main class="page-container">
     <BaseTitle title="User List" />
-    <Button label="Add User" @click="goToForm()" />
+    <Button label="Add Report" @click="goToForm()" />
     <ReportsTable/>
   </main>
 </template>

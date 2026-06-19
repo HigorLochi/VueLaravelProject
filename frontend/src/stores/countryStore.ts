@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
-import * as cityService from '@/services/cityService'
+import * as countryService from '@/services/countryService'
 
-export const useCityStore = defineStore('city', {
+export const useCountryStore = defineStore('country', {
     state: () => ({
         loading: false
     }),
@@ -11,7 +11,7 @@ export const useCityStore = defineStore('city', {
             this.loading = true;
 
             try {
-                const response = await cityService.get(where);
+                const response = await countryService.get(where);
 
                 if (response.status === 200) {
                     return response.data;
@@ -25,10 +25,10 @@ export const useCityStore = defineStore('city', {
             }
         },
 
-        async create(city: object) {
+        async create(country: object) {
             this.loading = true
             try {
-                await cityService.create(city)
+                await countryService.create(country)
 
                 return true
             } catch {
@@ -38,10 +38,10 @@ export const useCityStore = defineStore('city', {
             }
         },
 
-        async update(city: object) {
+        async update(country: object) {
             this.loading = true
             try {
-                await cityService.update(city)
+                await countryService.update(country)
 
                 return true
             } catch {
@@ -54,7 +54,7 @@ export const useCityStore = defineStore('city', {
         async destroy(id: Number) {
             this.loading = true
             try {
-                await cityService.destroy(id)
+                await countryService.destroy(id)
 
                 return true
             } catch {

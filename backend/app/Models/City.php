@@ -11,9 +11,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class City extends Model
 {
     use HasFactory;
-    
-    public function state(): belongsTo
+
+    public function country(): belongsTo
     {
-        return $this->belongsTo(State::class);
+        return $this->belongsTo(Country::class);
     }
 }

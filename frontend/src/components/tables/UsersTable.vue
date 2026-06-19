@@ -7,13 +7,15 @@ import dayjs from 'dayjs'
 
 const router = useRouter()
 
+var page = ref(0)
 var users = ref([])
+
 const name = ref('')
 const email = ref('')
 const userStore = useUserStore()
 
 async function search() {
-    var search = {}
+    var search = {page: page}
 
     if(name.value) search.name = name.value
     if(email.value) search.email = email.value
@@ -40,6 +42,11 @@ async function deleteUser(id){
     })
 }
 
+async function pageChange($e){
+    page = $e.page
+    search()
+}
+
 onMounted(() => {
     search()
 })
@@ -59,7 +66,7 @@ onMounted(() => {
             <Button label=" " icon="pi pi-search" severity="success" rounded aria-label="Search" :loading="userStore.loading" @click="search()" />
         </div>
     </form>
-    <DataTable :value="users" tableStyle="min-width: 50rem;border-radius:10px">
+    <DataTable :value="users" :loading="userStore.loading" tableStyle="min-width: 50rem;border-radius:10px">
         <Column field="id" header="ID"></Column>
         <Column field="name" header="Name"></Column>
         <Column field="email" header="E-mail"></Column>
@@ -79,4 +86,5 @@ onMounted(() => {
             </template>
         </Column>
     </DataTable>
+    <Paginator :rows="5" :totalRecords="120" @page="pageChange($event)"></Paginator>
 </template>

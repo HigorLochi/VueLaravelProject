@@ -7,6 +7,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\CountryController;
+use App\Http\Controllers\DangerLevelController;
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/user', function (Request $request) {
@@ -43,5 +44,13 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::post('/countries', 'insert');
         Route::put('/countries/{id}', 'update');
         Route::delete('/countries/{id}', 'delete');
+    });
+
+    Route::controller(DangerLevelController::class)->group(function () {
+        Route::post('/dangerlevels/search', 'all');
+        Route::get('/dangerlevels/{id}', 'getbyid');
+        Route::post('/dangerlevels', 'insert');
+        Route::put('/dangerlevels/{id}', 'update');
+        Route::delete('/dangerlevels/{id}', 'delete');
     });
 });

@@ -1,6 +1,10 @@
 @import './base.css';
 @import 'primeicons/primeicons.css';
 
+body{
+  font-family: Inter;
+}
+
 .wrapper {
   display: flex;
   align-items: center;
@@ -37,7 +41,7 @@ a {
 }
 
 form{
-  background-color: var(--vt-c-black-soft);
+  background-color: var(--vt-c-primevue-black);
   padding: 40px;
   border-radius: 15px;
   box-shadow: 5px;
@@ -66,7 +70,7 @@ form{
   text-align: center;
   margin-top: 10px;
   margin-bottom: 10px;
-  color: var(--vt-c-text-dark-2);
+  color: var(--vt-c-primevue-green);
 }
 
 .base-form-row {

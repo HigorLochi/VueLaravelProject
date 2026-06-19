@@ -3,5 +3,7 @@ export { default as HomeView } from './HomeView.vue';
 export { default as LoginView } from './LoginView.vue';
 export { default as ReportView } from './ReportView.vue';
 export { default as UserView } from './UserView.vue';
+export { default as CityView } from './CityView.vue';
+export { default as CountryView } from './CountryView.vue';
 export { default as ReportFormView } from './ReportFormView.vue';
 export { default as UserFormView } from './UserFormView.vue';
