@@ -28,6 +28,9 @@
 <template>
   <header>
     <Menubar v-if="authStore.user" :model="menuItems" style="border-radius: 0px;">
+      <template #start>
+        <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="40" height="40" />
+      </template>
       <template #item="{ item, props, hasSubmenu }"> 
         <router-link v-if="item.route" v-slot="{ href, navigate }" :to="item.route" custom> 
           <a v-ripple :href="href" v-bind="props.action" @click="navigate"> 

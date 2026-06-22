@@ -47,6 +47,11 @@ onMounted(() => {
     <DataTable :value="countries" :loading="countryStore.loading" tableStyle="min-width: 50rem;border-radius:10px">
         <Column field="id" header="ID"></Column>
         <Column field="name" header="Name"></Column>
+        <Column field="logo" header="Flag">
+            <template #body="{ data }">
+                <img alt="Vue logo" :src="`/src/assets/countrieslogos/${data.logo}.svg`" width="30" height="30" />
+            </template>
+        </Column>
         <Column field="created_at" header="Created At" dataType="date">
             <template #body="{ data }">
                 {{ dayjs(data.created_at).format('YYYY/MM/DD') }}

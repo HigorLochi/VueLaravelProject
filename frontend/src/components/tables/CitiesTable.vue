@@ -28,6 +28,12 @@ async function search() {
     })
 }
 
+async function getCountries() {
+    countryStore.search({}, 1, null).then((response) => {
+        countries.value = response.data
+    })
+}
+
 async function pageChange(event: any){
     page.value = event.page + 1
 
@@ -35,9 +41,7 @@ async function pageChange(event: any){
 }
 
 onMounted(() => {
-    countryStore.search({}, 1, null).then((response) => {
-        countries.value = response.data
-    })
+    getCountries()
     search()
 })
 </script>
@@ -50,8 +54,26 @@ onMounted(() => {
                 <label for="name">City</label>
             </FloatLabel>
             <FloatLabel>
-                <Select v-model="country" showClear :loading="countryStore.loading" :options="countries" optionLabel="name" fluid style="height: 42.5px;" />
-                <label for="name">Country</label>
+                <Select v-model="country" showClear :loading="countryStore.loading" :options="countries" optionLabel="name" placeholder="Select a Country" fluid  style="height: 42.5px;">
+                    <template #value="slotProps">
+                        <div v-if="slotProps.value" style="display: flex;flex-direction: row;gap: 10px;">
+                            <img style="border-radius: 5px;" alt="Vue logo" :src="`/src/assets/countrieslogos/${slotProps.value.logo}.svg`" width="20" height="20"/>
+                            <div>{{ slotProps.value.name }}</div>
+                        </div>
+                        <span v-else>
+                            {{ slotProps.placeholder }}
+                        </span>
+                    </template>
+                    <template #option="slotProps">
+                        <div style="display: flex;flex-direction: row;gap: 10px;">
+                            <img style="border-radius: 5px;" alt="Vue logo" :src="`/src/assets/countrieslogos/${slotProps.option.logo}.svg`" width="20" height="20"/>
+                            <div>{{ slotProps.option.name }}</div>
+                        </div>
+                    </template>
+                    <template #dropdownicon>
+                        <i class="pi pi-map" />
+                    </template>
+                </Select>
             </FloatLabel>
             <Button label=" " icon="pi pi-search" severity="success" rounded aria-label="Search" :loading="cityStore.loading" @click="search()" />
         </div>

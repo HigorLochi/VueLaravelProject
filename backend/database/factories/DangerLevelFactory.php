@@ -18,8 +18,9 @@ class DangerLevelFactory extends Factory
     public function definition(): array
     {
         return [
+            'title' => fake(),
+            'color' => fake(),
             'order' => rand(1, 10),
-            'title' => fake()->words(1, true)
         ];
     }
 }

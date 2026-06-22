@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('countries', function (Blueprint $table) {
             $table->id();
             $table->tinyText('name');
+            $table->tinyText('logo');
             $table->timestamps();
         });
     }

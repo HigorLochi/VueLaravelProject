@@ -36,6 +36,24 @@ async function search() {
     })
 }
 
+async function getDangerLevels() {
+    dangerLevelStore.search({}, 1, null).then((response) => {
+        dangerLevels.value = response.data
+    })
+}
+
+async function getCountries() {
+    countryStore.search({}, 1, null).then((response) => {
+        countries.value = response.data
+    })
+}
+
+async function getCities() {
+    cityStore.search({}, 1, null).then((response) => {
+        cities.value = response.data
+    })
+}
+
 async function pageChange(event: any){
     page.value = event.page + 1
 
@@ -43,6 +61,10 @@ async function pageChange(event: any){
 }
 
 onMounted(() => {
+    getDangerLevels()
+    getCountries().then(() => {
+        getCities()
+    })
     search()
 })
 </script>
@@ -51,22 +73,22 @@ onMounted(() => {
     <form :class="['base-form', `base-form-large`]" action="">
         <div class="base-form-row">
             <FloatLabel>
-                <InputText id="dangerlevel" type="text" v-model="dangerLevel" fluid />
-                <label for="dangerlevel">Danger Level</label>
+                <Select v-model="dangerLevel" showClear :loading="dangerLevelStore.loading" :options="dangerLevels" optionLabel="title" fluid style="height: 42.5px;" />
+                <label for="dangerLevel">Danger Level</label>
             </FloatLabel>
             <FloatLabel>
-                <Select v-model="country" showClear :loading="countryStore.loading" :options="countries" optionLabel="country" fluid style="height: 42.5px;" />
+                <Select v-model="country" showClear :loading="countryStore.loading" :options="countries" optionLabel="name" fluid style="height: 42.5px;" />
                 <label for="country">Country</label>
             </FloatLabel>
             <FloatLabel>
-                <Select v-model="city" showClear :loading="cityStore.loading" :options="cities" optionLabel="city" fluid style="height: 42.5px;" />
+                <Select v-model="city" showClear :loading="cityStore.loading" :options="cities" optionLabel="name" fluid style="height: 42.5px;" />
                 <label for="city">City</label>
             </FloatLabel>
             <Button label=" " icon="pi pi-search" severity="success" rounded aria-label="Search" :loading="cityStore.loading" @click="search()" />
         </div>
     </form>
-    <DataTable :value="reports" :loading="cityStore.loading" tableStyle="min-width: 50rem;border-radius:10px">
+    <!-- <DataTable :value="reports" :loading="cityStore.loading" tableStyle="min-width: 50rem;border-radius:10px">
         <Column field="title" header="Title"></Column>
-    </DataTable>
+    </DataTable> -->
     <Paginator :rows="limitPerPage" :totalRecords="totalRecords" @page="pageChange"></Paginator>
 </template>

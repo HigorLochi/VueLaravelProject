@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('danger_levels', function (Blueprint $table) {
             $table->id();
-            $table->tinyInteger('order');
             $table->tinyText('title');
+            $table->tinyText('color');
+            $table->tinyInteger('order');
         });
     }
 
