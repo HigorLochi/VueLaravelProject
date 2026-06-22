@@ -1,8 +1,7 @@
 import { defineStore } from 'pinia'
-import * as cityService from '@/services/cityService'
-import type { search } from '@/services/reportService';
+import * as dangerLevelService from '@/services/dangerLevelService'
 
-export const useCityStore = defineStore('city', {
+export const useDangerLevelStore = defineStore('dangerlevel', {
     state: () => ({
         loading: false
     }),
@@ -12,7 +11,7 @@ export const useCityStore = defineStore('city', {
             this.loading = true;
 
             try {
-                const response = await cityService.search(where, page, limitPerPage);
+                const response = await dangerLevelService.search(where, page, limitPerPage);
 
                 if (response.status === 200) {
                     return response.data;
@@ -26,23 +25,41 @@ export const useCityStore = defineStore('city', {
             }
         },
 
-        async create(cities: Array<object>) {
+        async getById(id: Number) {
+            this.loading = true;
+
+            try {
+                const response = await dangerLevelService.getById(id);
+
+                if (response.status === 200) {
+                    return response.data;
+                }
+
+                return {};
+            } catch (error) {
+                return {};
+            } finally {
+                this.loading = false;
+            }
+        },
+
+        async create(levels: Array<Object>) {
             this.loading = true
             try {
-                await cityService.create(cities)
+                await dangerLevelService.create(levels)
 
                 return true
-            } catch {
+            } catch(e) {
                 return false
             } finally {
                 this.loading = false
             }
         },
 
-        async update(city: object) {
+        async update(level: object) {
             this.loading = true
             try {
-                await cityService.update(city)
+                await dangerLevelService.update(level)
 
                 return true
             } catch {
@@ -55,7 +72,7 @@ export const useCityStore = defineStore('city', {
         async destroy(id: Number) {
             this.loading = true
             try {
-                await cityService.destroy(id)
+                await dangerLevelService.destroy(id)
 
                 return true
             } catch {

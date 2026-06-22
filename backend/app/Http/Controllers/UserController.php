@@ -12,9 +12,9 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-    public function all(Request $request): Collection
+    public function search(Request $request)
     {
-        return User::where($request->where)->get();
+        return User::where($request->where)->paginate(isset($request->limitPerPage) ? $request->limitPerPage : null);
     }
 
     public function getbyid(Request $request, string $id): User{

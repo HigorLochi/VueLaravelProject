@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { CountriesTable } from '@/components/tables/index.ts';
-import { BaseTitle } from '@/components/titles/index.ts';
+import CountriesTable from '@/components/tables/CountriesTable.vue';
+import BaseTitle from '@/components/titles/BaseTitle.vue';
 </script>
 
 <template>

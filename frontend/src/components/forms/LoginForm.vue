@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { BaseTitle } from '@/components/titles/index.ts';
+import BaseTitle from '@/components/titles/BaseTitle.vue';
 import { useAuthStore } from '@/stores/authStore.ts'
 import Alert from '@/services/alert'
 

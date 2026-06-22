@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { BaseTitle } from '@/components/titles/index.ts';
+import BaseTitle from '@/components/titles/BaseTitle.vue';
 import { useReportStore } from '@/stores/reportStore.ts'
+import { useCountryStore } from '@/stores/countryStore.ts'
+import { useCityStore } from '@/stores/cityStore.ts'
 import Alert from '@/services/alert'
 
 const route = useRoute()
@@ -17,17 +19,8 @@ var report = ref<any>({
     password: undefined
 })
 
-async function getReport() {
-    if(idreport){
-        reportStore.getById(idreport).then((response) => {
-            report.value = response
-        })
-    }
-}
-
 async function action(){
-    if(report.value.id == 0) await save()
-    else await update()
+    await save()
 }
 
 async function save() {
@@ -42,24 +35,12 @@ async function save() {
     })
 }
 
-async function update() {
-    reportStore.update(report.value).then((success) => {
-        if(success) {
-            Alert.success("Report updated sucessfully!").then(() => {
-                router.push('/reports')
-            })
-        } else {
-            Alert.error("An error has occurred!")
-        }
-    })
-}
-
 async function goToReports(){
     router.push("/reports")
 }
 
 onMounted(() => {
-    getReport()
+    
 })
 </script>
 

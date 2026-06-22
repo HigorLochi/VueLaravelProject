@@ -1,7 +1,7 @@
 import api from './api'
 
-export async function get(where: Object) {
-    return api.post('/api/users/search', {where : where})
+export async function search(where: Object, page: Number = 1, limitPerPage: any = null) {
+    return api.post('/api/users/search?page=' + page, {where : where, limitPerPage: limitPerPage})
 }
 
 export async function getById(id: Number) {

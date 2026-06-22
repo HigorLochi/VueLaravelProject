@@ -7,19 +7,21 @@ import { VueSpinnersPlugin } from 'vue3-spinners';
 
 import PrimeVue from 'primevue/config';
 import Lara from '@primeuix/themes/lara';
-import Menubar from 'primevue/menubar';
-import FloatLabel from 'primevue/floatlabel';
-import InputText from 'primevue/inputtext';
-import Password from 'primevue/password';
-import Textarea from 'primevue/textarea';
-import Select from 'primevue/select';
-import Button from "primevue/button"
-import Card from 'primevue/card';
-import DataTable from 'primevue/datatable';
-import Paginator from 'primevue/paginator';
-import Column from 'primevue/column';
-import ColumnGroup from 'primevue/columngroup';
-import Row from 'primevue/row';
+import {
+    Menubar, 
+    FloatLabel, 
+    InputText, 
+    Password, 
+    Textarea, 
+    Select, 
+    Button, 
+    Card, 
+    DataTable, 
+    Column, 
+    ColumnGroup, 
+    Row, 
+    Paginator 
+} from 'primevue'
 
 import App from './App.vue'
 import router from './router'
@@ -48,9 +50,9 @@ app.component('Select', Select);
 app.component('Button', Button);
 app.component('Card', Card);
 app.component('DataTable', DataTable);
-app.component('Paginator', Paginator);
 app.component('Column', Column);
 app.component('ColumnGroup', ColumnGroup);
 app.component('Row', Row);
+app.component('Paginator', Paginator);
 
 app.mount('#app')

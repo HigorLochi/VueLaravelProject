@@ -2,7 +2,7 @@
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { type User } from '@/interfaces/IUser';
-import { BaseTitle } from '@/components/titles/index.ts';
+import BaseTitle from '@/components/titles/BaseTitle.vue';
 import { useUserStore } from '@/stores/userStore.ts'
 import Alert from '@/services/alert'
 

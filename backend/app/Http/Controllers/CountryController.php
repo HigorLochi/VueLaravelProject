@@ -12,9 +12,9 @@ use App\Models\Country;
 
 class CountryController extends Controller
 {
-    public function all(Request $request): Collection
+    public function search(Request $request)
     {
-        return Country::where($request->where)->get();
+        return Country::where($request->where)->paginate(isset($request->limitPerPage) ? $request->limitPerPage : null);
     }
 
     public function getbyid(Request $request, string $id): Country{

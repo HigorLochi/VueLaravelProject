@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { UserForm } from '@/components/forms/index.ts';
+import UserForm from '@/components/forms/UserForm.vue';
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ReportForm } from '@/components/forms/index.ts';
+import ReportForm from '@/components/forms/ReportForm.vue';
 </script>
 
 <template>

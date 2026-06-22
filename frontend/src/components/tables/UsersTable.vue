@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/userStore.ts'
@@ -7,7 +7,9 @@ import dayjs from 'dayjs'
 
 const router = useRouter()
 
-var page = ref(0)
+const limitPerPage = ref(10)
+const page = ref(1)
+const totalRecords = ref(0)
 var users = ref([])
 
 const name = ref('')
@@ -15,35 +17,37 @@ const email = ref('')
 const userStore = useUserStore()
 
 async function search() {
-    var search = {page: page}
+    var search:any = {}
 
     if(name.value) search.name = name.value
     if(email.value) search.email = email.value
 
-    userStore.getAll(search).then((response) => {
-        users.value = response
+    userStore.search(search, page.value, limitPerPage.value).then((response) => {
+        users.value = response.data
+        totalRecords.value = response.total
     })
 }
 
-async function goToUpdatePage(id){
+async function goToUpdatePage(id: Number){
     router.push("/user-form/" + id)
 }
 
-async function deleteUser(id){
+async function deleteUser(id: Number){
     Alert.question("Do you want to delete the user?", "Yes", "No").then((response) => {
       if (response.isConfirmed) {
         userStore.destroy(id).then((success) => {
             if(success) Alert.success("User deleted!")
             else Alert.error("An error has ocurred!")
 
-            router.go()
+            router.go(0)
         })
       }
     })
 }
 
-async function pageChange($e){
-    page = $e.page
+async function pageChange(event: any){
+    page.value = event.page + 1
+
     search()
 }
 
@@ -86,5 +90,5 @@ onMounted(() => {
             </template>
         </Column>
     </DataTable>
-    <Paginator :rows="5" :totalRecords="120" @page="pageChange($event)"></Paginator>
+    <Paginator :rows="limitPerPage" :totalRecords="totalRecords" @page="pageChange"></Paginator>
 </template>

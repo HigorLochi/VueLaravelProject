@@ -1,31 +1,42 @@
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useCityStore } from '@/stores/cityStore.ts'
 import { useCountryStore } from '@/stores/countryStore.ts'
 import dayjs from 'dayjs'
 
+const limitPerPage = ref(10)
+const page = ref(1)
+const totalRecords = ref(10)
+
 var cities = ref([])
 var countries = ref([])
 
 const name = ref('')
-const country = ref({})
+const country:any = ref({})
 const cityStore = useCityStore()
 const countryStore = useCountryStore()
 
 async function search() {
-    var search = {}
+    var search:any = {}
 
     if(name.value) search.name = name.value
-    if(country.value.name) search.country_id = country.value.id
+    if(country.value && country.value.name) search.country_id = country.value.id
 
-    cityStore.getAll(search).then((response) => {
-        cities.value = response
+    cityStore.search(search, page.value, limitPerPage.value).then((response) => {
+        cities.value = response.data
+        totalRecords.value = response.total
     })
 }
 
+async function pageChange(event: any){
+    page.value = event.page + 1
+
+    search()
+}
+
 onMounted(() => {
-    countryStore.getAll({}).then((response) => {
-        countries.value = response
+    countryStore.search({}, 1, null).then((response) => {
+        countries.value = response.data
     })
     search()
 })
@@ -59,4 +70,5 @@ onMounted(() => {
             </template>
         </Column>
     </DataTable>
+    <Paginator :rows="limitPerPage" :totalRecords="totalRecords" @page="pageChange"></Paginator>
 </template>

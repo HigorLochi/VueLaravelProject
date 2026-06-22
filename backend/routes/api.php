@@ -15,7 +15,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     });
 
     Route::controller(UserController::class)->group(function () {
-        Route::post('/users/search', 'all');
+        Route::post('/users/search', 'search');
         Route::get('/users/{id}', 'getbyid');
         Route::post('/users', 'insert');
         Route::put('/users/{id}', 'update');
@@ -23,7 +23,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     });
 
     Route::controller(ReportController::class)->group(function () {
-        Route::post('/reports/search', 'all');
+        Route::post('/reports/search', 'search');
         Route::get('/reports/{id}', 'getbyid');
         Route::post('/reports', 'insert');
         Route::put('/reports/{id}', 'update');
@@ -31,7 +31,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     });
 
     Route::controller(CityController::class)->group(function () {
-        Route::post('/cities/search', 'all');
+        Route::post('/cities/search', 'search');
         Route::get('/cities/{id}', 'getbyid');
         Route::post('/cities', 'insert');
         Route::put('/cities/{id}', 'update');
@@ -39,7 +39,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     });
 
     Route::controller(CountryController::class)->group(function () {
-        Route::post('/countries/search', 'all');
+        Route::post('/countries/search', 'search');
         Route::get('/countries/{id}', 'getbyid');
         Route::post('/countries', 'insert');
         Route::put('/countries/{id}', 'update');
@@ -47,7 +47,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     });
 
     Route::controller(DangerLevelController::class)->group(function () {
-        Route::post('/dangerlevels/search', 'all');
+        Route::post('/dangerlevels/search', 'search');
         Route::get('/dangerlevels/{id}', 'getbyid');
         Route::post('/dangerlevels', 'insert');
         Route::put('/dangerlevels/{id}', 'update');

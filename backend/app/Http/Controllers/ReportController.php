@@ -12,9 +12,9 @@ use App\Models\Report;
 
 class ReportController extends Controller
 {
-    public function all(Request $request): Collection
+    public function search(Request $request)
     {
-        return Report::where($request->where)->get();
+        return Report::where($request->where)->paginate(isset($request->limitPerPage) ? $request->limitPerPage : null);
     }
 
     public function getbyid(Request $request, string $id): Report{

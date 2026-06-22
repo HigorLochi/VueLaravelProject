@@ -7,11 +7,11 @@ export const useCountryStore = defineStore('country', {
     }),
 
     actions: {
-        async getAll(where: object) {
+        async search(where: Object, page: Number, limitPerPage: any) {
             this.loading = true;
 
             try {
-                const response = await countryService.get(where);
+                const response = await countryService.search(where, page, limitPerPage);
 
                 if (response.status === 200) {
                     return response.data;
@@ -25,10 +25,10 @@ export const useCountryStore = defineStore('country', {
             }
         },
 
-        async create(country: object) {
+        async create(countries: Array<Object>) {
             this.loading = true
             try {
-                await countryService.create(country)
+                await countryService.create(countries)
 
                 return true
             } catch {

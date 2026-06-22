@@ -12,9 +12,9 @@ use App\Models\City;
 
 class CityController extends Controller
 {
-    public function all(Request $request): Collection
+    public function search(Request $request)
     {
-        return City::with('country')->where($request->where)->get();
+        return City::with('country')->where($request->where)->paginate(isset($request->limitPerPage) ? $request->limitPerPage : null);
     }
 
     public function getbyid(Request $request, string $id): City{

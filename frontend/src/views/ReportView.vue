@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import { ReportsTable } from '@/components/tables/index.ts';
-import { BaseTitle } from '@/components/titles/index.ts';
+import ReportsTable from '@/components/tables/ReportsTable.vue';
+import BaseTitle from '@/components/titles/BaseTitle.vue';
 
 const router = useRouter()
 

@@ -7,11 +7,11 @@ export const useReportStore = defineStore('report', {
     }),
 
     actions: {
-        async getAll(where: Object) {
+        async search(where: Object, page: Number, limitPerPage: any) {
             this.loading = true;
 
             try {
-                const response = await reportService.get(where);
+                const response = await reportService.search(where, page, limitPerPage);
 
                 if (response.status === 200) {
                     return response.data;

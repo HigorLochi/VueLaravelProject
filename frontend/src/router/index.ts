@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { LoginView, ReportView, ReportFormView, UserView, UserFormView, CityView,CountryView, AboutView } from '@/views/index.ts'
+import { LoginView, ReportView, ReportFormView, UserView, UserFormView, CityView,CountryView, AboutView } from '@/views/'
 import { useAuthStore } from '@/stores/authStore'
 
 const router = createRouter({
