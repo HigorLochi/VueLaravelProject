@@ -14,7 +14,7 @@ class ReportController extends Controller
 {
     public function search(Request $request)
     {
-        return Report::where($request->where)->paginate(isset($request->limitPerPage) ? $request->limitPerPage : null);
+        return Report::with('city.country', 'user', 'danger_level')->where($request->where)->paginate(isset($request->limitPerPage) ? $request->limitPerPage : null);
     }
 
     public function getbyid(Request $request, string $id): Report{

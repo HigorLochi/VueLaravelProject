@@ -69,17 +69,17 @@ onMounted(() => {
         <BaseTitle title="User Form" />
         <div class="base-form-row">
             <FloatLabel>
-                <InputText id="name" type="text" v-model="user.name" fluid />
+                <InputText id="name" type="text" v-model="user.name" :invalid="!user.name" required fluid />
                 <label for="name">Name</label>
             </FloatLabel>
         </div>
         <div class="base-form-row">
             <FloatLabel>
-                <InputText id="email" type="text" v-model="user.email" fluid />
+                <InputText id="email" type="text" v-model="user.email" :invalid="!user.email" required fluid />
                 <label for="email">E-mail</label>
             </FloatLabel>
             <FloatLabel v-if="!iduser">
-                <Password id="password" type="text" v-model="user.password" fluid />
+                <Password id="password" type="text" v-model="user.password" :invalid="!user.password" required fluid />
                 <label for="password">Password</label>
             </FloatLabel>
         </div>

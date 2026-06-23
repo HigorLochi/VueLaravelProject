@@ -8,6 +8,10 @@ import { VueSpinnersPlugin } from 'vue3-spinners';
 import PrimeVue from 'primevue/config';
 import Lara from '@primeuix/themes/lara';
 import {
+    Chip,
+    Divider,
+    Splitter,
+    SplitterPanel,
     Menubar, 
     FloatLabel, 
     InputText, 
@@ -41,6 +45,10 @@ app.use(PrimeVue, {
     }
 });
 
+app.component('Chip', Chip);
+app.component('Divider', Divider);
+app.component('Splitter', Splitter);
+app.component('SplitterPanel', SplitterPanel);
 app.component('Menubar', Menubar);
 app.component('FloatLabel', FloatLabel);
 app.component('InputText', InputText);

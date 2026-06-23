@@ -34,13 +34,13 @@ function exit(){
         <BaseTitle title="Acess Panel" />
         <div :class="['base-form-row', `base-form-row-center`]">    
             <FloatLabel>
-                <InputText id="email" type="text" v-model="email" fluid />
+                <InputText id="email" type="text" v-model="email" :invalid="!email" required fluid />
                 <label for="email">Username</label>
             </FloatLabel>
         </div>
         <div :class="['base-form-row', `base-form-row-center`]">
             <FloatLabel>
-                <Password id="password" type="text" v-model="password" toggleMask fluid />
+                <Password id="password" type="text" v-model="password" :invalid="!password" toggleMask required fluid />
                 <label for="password">Password</label>
             </FloatLabel>
         </div>

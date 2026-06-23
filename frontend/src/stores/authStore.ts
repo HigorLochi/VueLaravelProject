@@ -10,6 +10,10 @@ export const useAuthStore = defineStore('auth', {
   }),
 
   actions: {
+    getUser(): any{
+      return this.user
+    },
+
     async checkAuth() {
       this.loading = true;
 
