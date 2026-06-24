@@ -78,10 +78,10 @@ onMounted(() => {
         <div class="base-form-row">
             <FloatLabel>
                 <Select v-model="dangerLevel" showClear :loading="dangerLevelStore.loading" :options="dangerLevels" optionLabel="title" fluid style="height: 42.5px;" />
-                <label for="dangerLevel">Danger Level</label>
+                <label for="dangerLevel">{{$t('DangerLevel')}}</label>
             </FloatLabel>
             <FloatLabel>
-                <Select v-model="country" showClear :loading="countryStore.loading" :options="countries" optionLabel="name" placeholder="Select a Country" @change="changeCountry" fluid  style="height: 42.5px;">
+                <Select v-model="country" showClear :loading="countryStore.loading" :options="countries" optionLabel="name" :placeholder="$t('Country')" @change="changeCountry" fluid  style="height: 42.5px;">
                     <template #value="slotProps">
                         <div v-if="slotProps.value" style="display: flex;flex-direction: row;gap: 10px;">
                             <img style="border-radius: 5px;" alt="Vue logo" :src="`/src/assets/countrieslogos/${slotProps.value.logo}.svg`" width="20" height="20"/>
@@ -104,7 +104,7 @@ onMounted(() => {
             </FloatLabel>
             <FloatLabel>
                 <Select v-model="city" showClear :loading="cityStore.loading" :options="cities" optionLabel="name" fluid style="height: 42.5px;" />
-                <label for="city">City</label>
+                <label for="city">{{ $t('City') }}</label>
             </FloatLabel>
             <Button label=" " icon="pi pi-search" severity="success" rounded aria-label="Search" :loading="reportStore.loading" @click="search()" />
         </div>

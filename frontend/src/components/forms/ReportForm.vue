@@ -81,32 +81,32 @@ onMounted(() => {
         <div class="base-form-row">
             <FloatLabel>
                 <InputText id="title" type="text" v-model="report.title" fluid :invalid="!report.title" required />
-                <label for="title">Title</label>
+                <label for="title">{{ $t('Title') }}</label>
             </FloatLabel>
         </div>
         <div class="base-form-row">
             <FloatLabel>
                 <Textarea id="description" rows="5" v-model="report.description" fluid :invalid="!report.description" required maxlength="2000" />
-                <label for="description">Description</label>
+                <label for="description">{{ $t('Description') }}</label>
             </FloatLabel>
         </div>
         <div class="base-form-row">
             <FloatLabel>
                 <Select v-model="report.dangerlevel" showClear :loading="dangerLevelStore.loading" :options="dangerLevels" optionLabel="title" fluid :invalid="!report.dangerlevel" required style="height: 42.5px;" />
-                <label for="dangerlevel">Danger Level</label>
+                <label for="dangerlevel">{{ $t('DangerLevel') }}</label>
             </FloatLabel>
             <FloatLabel>
                 <Select v-model="report.country" showClear :loading="countryStore.loading" :options="countries" optionLabel="name" fluid :invalid="!report.country" @change="changeCountry($event)" style="height: 42.5px;" />
-                <label for="country">Country</label>
+                <label for="country">{{ $t('Country') }}</label>
             </FloatLabel>
             <FloatLabel>
                 <Select v-model="report.city" showClear :loading="cityStore.loading" :options="cities" optionLabel="name" fluid :invalid="!report.city" required style="height: 42.5px;" />
-                <label for="city">City</label>
+                <label for="city">{{ $t('City') }}</label>
             </FloatLabel>
         </div>
         <div :class="['base-form-row', `base-form-row-center`]">
-            <Button :loading="reportStore.loading" label="Confirmar" type="submit" />
-            <Button :loading="reportStore.loading" label="Cancelar" severity="contrast" @click="goToReports" />
+            <Button :loading="reportStore.loading" :label="$t('Confirm')" type="submit" />
+            <Button :loading="reportStore.loading" :label="$t('Cancel')" severity="contrast" @click="goToReports" />
         </div>
     </form>
 </template>

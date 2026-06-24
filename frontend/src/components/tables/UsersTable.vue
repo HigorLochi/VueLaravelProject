@@ -61,30 +61,30 @@ onMounted(() => {
         <div class="base-form-row">
             <FloatLabel>
                 <InputText id="name" type="text" v-model="name" fluid />
-                <label for="name">Name</label>
+                <label for="name">{{ $t('Username') }}</label>
             </FloatLabel>
             <FloatLabel>
                 <InputText id="email" type="text" v-model="email" fluid />
-                <label for="email">E-mail</label>
+                <label for="email">{{ $t('Email') }}</label>
             </FloatLabel>
             <Button label=" " icon="pi pi-search" severity="success" rounded aria-label="Search" :loading="userStore.loading" @click="search()" />
         </div>
     </form>
     <DataTable :value="users" :loading="userStore.loading" tableStyle="min-width: 50rem;border-radius:10px">
         <Column field="id" header="ID"></Column>
-        <Column field="name" header="Name"></Column>
-        <Column field="email" header="E-mail"></Column>
-        <Column field="created_at" header="Created At" dataType="date">
+        <Column field="name" :header="$t('Username')"></Column>
+        <Column field="email" :header="$t('Email')"></Column>
+        <Column field="created_at" :header="$t('CreatedAt')" dataType="date">
             <template #body="{ data }">
                 {{ dayjs(data.created_at).format('YYYY/MM/DD') }}
             </template>
         </Column>
-        <Column header="Edit">
+        <Column :header="$t('Edit')">
             <template #body="{ data }">
                 <Button icon="pi pi-pencil" @click="goToUpdatePage(data.id)" />
             </template>
         </Column>
-        <Column header="Delete">
+        <Column :header="$t('Delete')">
             <template #body="{ data }">
                 <Button icon="pi pi-trash" severity="danger" @click="deleteUser(data.id)" />
             </template>

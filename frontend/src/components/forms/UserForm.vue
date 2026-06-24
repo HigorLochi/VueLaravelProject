@@ -70,22 +70,22 @@ onMounted(() => {
         <div class="base-form-row">
             <FloatLabel>
                 <InputText id="name" type="text" v-model="user.name" :invalid="!user.name" required fluid />
-                <label for="name">Name</label>
+                <label for="name">{{ $t('Username') }}</label>
             </FloatLabel>
         </div>
         <div class="base-form-row">
             <FloatLabel>
                 <InputText id="email" type="text" v-model="user.email" :invalid="!user.email" required fluid />
-                <label for="email">E-mail</label>
+                <label for="email">{{ $t('Email') }}</label>
             </FloatLabel>
             <FloatLabel v-if="!iduser">
                 <Password id="password" type="text" v-model="user.password" :invalid="!user.password" required fluid />
-                <label for="password">Password</label>
+                <label for="password">{{ $t('Password') }}</label>
             </FloatLabel>
         </div>
         <div :class="['base-form-row', `base-form-row-center`]">
-            <Button :loading="userStore.loading" label="Confirmar" type="submit" />
-            <Button :loading="userStore.loading" label="Cancelar" severity="contrast" @click="goToUsers" />
+            <Button :loading="userStore.loading" :label="$t('Confirm')" type="submit" />
+            <Button :loading="userStore.loading" :label="$t('Cancel')" severity="contrast" @click="goToUsers" />
         </div>
     </form>
 </template>

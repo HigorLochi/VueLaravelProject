@@ -51,10 +51,10 @@ onMounted(() => {
         <div class="base-form-row">
             <FloatLabel>
                 <InputText id="name" type="text" v-model="name" fluid />
-                <label for="name">City</label>
+                <label for="name">{{ $t('City') }}</label>
             </FloatLabel>
             <FloatLabel>
-                <Select v-model="country" showClear :loading="countryStore.loading" :options="countries" optionLabel="name" placeholder="Select a Country" fluid  style="height: 42.5px;">
+                <Select v-model="country" showClear :loading="countryStore.loading" :options="countries" optionLabel="name" :placeholder="$t('Country')" fluid  style="height: 42.5px;">
                     <template #value="slotProps">
                         <div v-if="slotProps.value" style="display: flex;flex-direction: row;gap: 10px;">
                             <img style="border-radius: 5px;" alt="Vue logo" :src="`/src/assets/countrieslogos/${slotProps.value.logo}.svg`" width="20" height="20"/>
@@ -80,13 +80,13 @@ onMounted(() => {
     </form>
     <DataTable :value="cities" :loading="cityStore.loading" tableStyle="min-width: 50rem;border-radius:10px">
         <Column field="id" header="ID"></Column>
-        <Column field="name" header="Name"></Column>
-        <Column header="Country" dataType="date">
+        <Column field="name" :header="$t('Name')"></Column>
+        <Column :header="$t('Country')" dataType="date">
             <template #body="{ data }">
                 {{ data.country.name }}
             </template>
         </Column>
-        <Column field="created_at" header="Created At" dataType="date">
+        <Column field="created_at" :header="$t('CreatedAt')" dataType="date">
             <template #body="{ data }">
                 {{ dayjs(data.created_at).format('YYYY/MM/DD') }}
             </template>

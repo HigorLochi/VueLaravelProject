@@ -14,7 +14,8 @@ class CountrySeeder extends Seeder
     {
         $country = Country::factory()->create([
             'name' => 'Brazil',
-            'logo' => 'br'
+            'logo' => 'br',
+            'lang' => 'ptbr'
         ]);
 
         $country->cities()->createMany([
@@ -32,7 +33,8 @@ class CountrySeeder extends Seeder
 
         $country2 = Country::factory()->create([
             'name' => 'United States',
-            'logo' => 'us'
+            'logo' => 'us',
+            'lang' => 'en'
         ]);
 
         $country2->cities()->createMany([
@@ -50,7 +52,8 @@ class CountrySeeder extends Seeder
 
         $country3 = Country::factory()->create([
             'name' => 'Canada',
-            'logo' => 'ca'
+            'logo' => 'ca',
+            'lang' => 'en'
         ]);
 
         $country3->cities()->createMany([

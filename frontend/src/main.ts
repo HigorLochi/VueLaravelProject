@@ -5,6 +5,7 @@ import { createPinia } from 'pinia'
 import { useAuthStore } from '@/stores/authStore'
 import { VueSpinnersPlugin } from 'vue3-spinners';
 
+import i18n from '@/i18n'
 import PrimeVue from 'primevue/config';
 import Lara from '@primeuix/themes/lara';
 import {
@@ -19,6 +20,7 @@ import {
     Textarea, 
     Select, 
     Button, 
+    SelectButton, 
     Card, 
     DataTable, 
     Column, 
@@ -32,12 +34,14 @@ import router from './router'
 
 const app = createApp(App)
 
+app.use(i18n)
 app.use(createPinia())
 
 const authStore = useAuthStore()
 await authStore.checkAuth()
 
 app.use(router)
+app.use(i18n)
 app.use(VueSpinnersPlugin);
 app.use(PrimeVue, {
     theme: {
@@ -56,6 +60,7 @@ app.component('Password', Password);
 app.component('Textarea', Textarea);
 app.component('Select', Select);
 app.component('Button', Button);
+app.component('SelectButton', SelectButton);
 app.component('Card', Card);
 app.component('DataTable', DataTable);
 app.component('Column', Column);

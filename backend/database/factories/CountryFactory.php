@@ -20,7 +20,8 @@ class CountryFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'logo' => Str::random(2)
+            'logo' => Str::random(2),
+            'lang' => Str::random(2)
         ];
     }
 }

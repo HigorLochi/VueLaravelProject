@@ -12,8 +12,8 @@ async function goToForm() {
 
 <template>
   <main class="page-container">
-    <BaseTitle title="User List" />
-    <Button label="Add Report" @click="goToForm()" />
+    <BaseTitle :title="$t('ReportList')" />
+    <Button :label="$t('AddReport')" @click="goToForm()" />
     <ReportsTable/>
   </main>
 </template>

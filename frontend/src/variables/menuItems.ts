@@ -4,12 +4,12 @@ export const menuItems: any = [
         icon: 'pi pi-clipboard',
         items: [
             {
-                label: 'Report List',
+                label: 'ReportList',
                 icon: 'pi pi-list',
                 route: '/reports'
             },
             {
-                label: 'Report Form',
+                label: 'ReportForm',
                 icon: 'pi pi-plus',
                 route: '/report-form'
             }
@@ -20,12 +20,12 @@ export const menuItems: any = [
         icon: 'pi pi-users',
         items: [
             {
-                label: 'User List',
+                label: 'UserList',
                 icon: 'pi pi-list',
                 route: '/users'
             },
             {
-                label: 'User Form',
+                label: 'UserForm',
                 icon: 'pi pi-plus',
                 route: '/user-form'
             }

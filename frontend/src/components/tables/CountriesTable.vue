@@ -39,20 +39,20 @@ onMounted(() => {
         <div class="base-form-row">
             <FloatLabel>
                 <InputText id="name" type="text" v-model="name" fluid />
-                <label for="name">Country</label>
+                <label for="name">{{ $t('Country') }}</label>
             </FloatLabel>
             <Button label="" icon="pi pi-search" severity="success" rounded aria-label="Search" :loading="countryStore.loading" @click="search()" />
         </div>
     </form>
     <DataTable :value="countries" :loading="countryStore.loading" tableStyle="min-width: 50rem;border-radius:10px">
         <Column field="id" header="ID"></Column>
-        <Column field="name" header="Name"></Column>
-        <Column field="logo" header="Flag">
+        <Column field="name" :header="$t('Name')"></Column>
+        <Column field="logo" :header="$t('Flag')">
             <template #body="{ data }">
                 <img alt="Vue logo" :src="`/src/assets/countrieslogos/${data.logo}.svg`" width="30" height="30" />
             </template>
         </Column>
-        <Column field="created_at" header="Created At" dataType="date">
+        <Column field="created_at" :header="$t('CreatedAt')" dataType="date">
             <template #body="{ data }">
                 {{ dayjs(data.created_at).format('YYYY/MM/DD') }}
             </template>

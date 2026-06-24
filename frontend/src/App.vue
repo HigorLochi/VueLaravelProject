@@ -1,28 +1,42 @@
 <script setup lang="ts">
-  import { onMounted } from 'vue'
-  import { useRouter, RouterLink, RouterView } from 'vue-router'
-  import { useAuthStore } from '@/stores/authStore'
-  import Alert from '@/services/alert'
-  import { menuItems } from '@/variables/menuItems'
+import { ref, onMounted } from 'vue'
+import { useRouter, RouterLink, RouterView } from 'vue-router'
+import { useAuthStore } from '@/stores/authStore'
+import { useCountryStore } from '@/stores/countryStore'
+import Alert from '@/services/alert'
+import { menuItems } from '@/variables/menuItems'
 
-  const authStore = useAuthStore()
-  const router = useRouter()
+const authStore = useAuthStore()
+const countryStore = useCountryStore()
+const router = useRouter()
 
-  async function handleLogout() {
-    Alert.question("Do you confirm the logout?", "Yes", "No").then((response) => {
-      if (response.isConfirmed) {
-        authStore.logout().then((success) => {
-          if(success) 
-            router.push('/login')
-        })
-      }
-    })
-    
-  }
+var languages = ref()
 
-  onMounted(async () => {
-    await authStore.checkAuth()
+async function handleLogout() {
+  Alert.question("Do you confirm the logout?", "Yes", "No").then((response) => {
+    if (response.isConfirmed) {
+      authStore.logout().then((success) => {
+        if(success) 
+          router.push('/login')
+      })
+    }
   })
+  
+}
+
+onMounted(async () => {
+  await authStore.checkAuth()
+  countryStore.search({}, 1, null).then((response) => {
+    languages.value = []
+
+    if (response.hasOwnProperty('data')) { 
+      response.data.forEach((country: any) => {
+        if(languages.value.indexOf(country.lang) === -1)
+          languages.value.push(country.lang)
+      });
+    }
+  })
+})
 </script>
 
 <template>
@@ -34,17 +48,19 @@
       <template #item="{ item, props, hasSubmenu }"> 
         <router-link v-if="item.route" v-slot="{ href, navigate }" :to="item.route" custom> 
           <a v-ripple :href="href" v-bind="props.action" @click="navigate"> 
-            <span :class="item.icon" /> <span>{{ item.label }}</span> 
+            <span :class="item.icon" /> <span>{{ $t(String(item.label)) }}</span> 
           </a> 
         </router-link> 
         <a v-else v-ripple :href="item.url" :target="item.target" v-bind="props.action"> 
-          <span :class="item.icon" /> <span>{{ item.label }}</span> 
+          <span :class="item.icon" /> <span>{{ $t(String(item.label)) }}</span> 
           <span v-if="hasSubmenu" class="pi pi-fw pi-angle-down" /> 
         </a> 
       </template>
       <template #end>
+        <SelectButton v-model="$i18n.locale" :options="languages" />
         <Button
-          label="Logout"
+          style="margin-left: 20px;"
+          :label="$t('Logout')"
           icon="pi pi-sign-out"
           severity="contrast"
           @click="handleLogout"

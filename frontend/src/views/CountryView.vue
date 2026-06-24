@@ -5,7 +5,7 @@ import BaseTitle from '@/components/titles/BaseTitle.vue';
 
 <template>
   <main class="page-container">
-    <BaseTitle title="Country List" />
+    <BaseTitle :title="$t('CountryList')" />
     <CountriesTable/>
   </main>
 </template>
