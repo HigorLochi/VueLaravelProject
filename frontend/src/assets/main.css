@@ -36,8 +36,18 @@ a {
 .page-container {
   width: 90%;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 24px 24px;
   box-sizing: border-box;
+}
+
+.chart{
+  width: 100%; 
+  background-color: var(--vt-c-primevue-black); 
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
 }
 
 form{
@@ -92,81 +102,4 @@ form{
 .base-form-row-right{
   justify-content: right;
   align-items: right;
-}
-
-.base-input-label{
-  color: var(--vt-c-text-dark-2);
-  width: 80px;
-  text-align: right;
-  margin-top: auto;
-  margin-bottom: auto;
-}
-
-.base-input{
-  flex: 1;
-  width: 60%;
-  color: var(--color-text);
-  font-size: 15px;
-  padding-left: 5px;
-  min-height: 30px;
-  background-color : var(--vt-c-black-soft); 
-  border: 2px solid;
-  border-color: var(--color-text);
-  border-radius: 8px;
-}
-
-.base-input:focus {
-  outline: none;
-  border-color: var(--vt-c-text-green-1);
-}
-
-.base-button{
-  margin-top: 10px;
-  margin-bottom: 10px;
-  min-width: 100px;
-  min-height: 30px;
-  border: 0cap;
-  border-radius: 10px;
-  border-color: var(--vt-c-text-green-1);
-}
-
-.base-button-right{
-  margin-right: 10px;
-  margin-left: auto;
-}
-
-.base-button-confirm{
-  color: white;
-  background-color: var(--vt-c-text-green-1);
-}
-
-.base-button:disabled,
-.base-button[disabled]{
-  border: 1px solid #999999 !important;
-  background-color: #cccccc !important;
-  color: #666666 !important;
-}
-
-.default-table{
-  background-color: var(--vt-c-black-soft);
-  border-radius: 15px;
-  box-shadow: 5px;
-  margin-top: 20px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
-  border-spacing: 20px;
-  border-collapse: separate;
-}
-
-.default-table thead{
-  color: var(--vt-c-text-green-1);
-}
-
-.default-table tr{
-  padding: 10px;
-}
-
-.default-table th, td{
-  text-align: center;
 }

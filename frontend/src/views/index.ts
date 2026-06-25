@@ -1,5 +1,5 @@
 export { default as AboutView } from './AboutView.vue';
-export { default as HomeView } from './HomeView.vue';
+export { default as InsightsView } from './InsightsView.vue';
 export { default as LoginView } from './LoginView.vue';
 export { default as ReportView } from './ReportView.vue';
 export { default as UserView } from './UserView.vue';

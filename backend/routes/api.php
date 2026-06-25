@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\InsightController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CityController;
@@ -20,6 +21,10 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::post('/users', 'insert');
         Route::put('/users/{id}', 'update');
         Route::delete('/users/{id}', 'delete');
+    });
+
+    Route::controller(InsightController::class)->group(function () {
+        Route::get('/insights/reportcountbymonth', 'reportcountbymonth');
     });
 
     Route::controller(ReportController::class)->group(function () {

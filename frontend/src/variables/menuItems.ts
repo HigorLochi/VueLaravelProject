@@ -1,5 +1,10 @@
 export const menuItems: any = [
     {
+        label: 'Data Insights',
+        icon: 'pi pi-chart-bar',
+        route: '/insights'
+    },
+    {
         label: 'Reports',
         icon: 'pi pi-clipboard',
         items: [

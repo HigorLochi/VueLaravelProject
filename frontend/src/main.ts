@@ -26,15 +26,16 @@ import {
     Column, 
     ColumnGroup, 
     Row, 
-    Paginator 
+    Paginator
 } from 'primevue'
+
+import Chart from 'primevue/chart';
 
 import App from './App.vue'
 import router from './router'
 
 const app = createApp(App)
 
-app.use(i18n)
 app.use(createPinia())
 
 const authStore = useAuthStore()
@@ -49,6 +50,7 @@ app.use(PrimeVue, {
     }
 });
 
+app.component('Chart', Chart)
 app.component('Chip', Chip);
 app.component('Divider', Divider);
 app.component('Splitter', Splitter);
