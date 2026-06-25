@@ -1,6 +1,6 @@
 import api from './api'
 
-export async function search(where: Object, page: Number = 1, limitPerPage: any = null) {
+export async function search(where: Object, page: Number, limitPerPage: any) {
     return api.post('/api/cities/search?page=' + page, {where : where, limitPerPage: limitPerPage})
 }
 

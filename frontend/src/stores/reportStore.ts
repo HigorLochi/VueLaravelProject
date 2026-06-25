@@ -7,7 +7,7 @@ export const useReportStore = defineStore('report', {
     }),
 
     actions: {
-        async search(where: Object, page: Number, limitPerPage: any) {
+        async search(where: Object = {}, page: Number = 1, limitPerPage: any = null) {
             this.loading = true;
 
             try {

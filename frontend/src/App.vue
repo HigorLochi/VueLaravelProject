@@ -26,16 +26,19 @@ async function handleLogout() {
 
 onMounted(async () => {
   await authStore.checkAuth()
-  countryStore.search({}, 1, null).then((response) => {
-    languages.value = []
 
-    if (response.hasOwnProperty('data')) { 
-      response.data.forEach((country: any) => {
-        if(languages.value.indexOf(country.lang) === -1)
-          languages.value.push(country.lang)
-      });
-    }
-  })
+  if(authStore.user){
+    countryStore.search().then((response) => {
+      languages.value = []
+
+      if (response.hasOwnProperty('data')) { 
+        response.data.forEach((country: any) => {
+          if(languages.value.indexOf(country.lang) === -1)
+            languages.value.push(country.lang)
+        });
+      }
+    })
+  }
 })
 </script>
 

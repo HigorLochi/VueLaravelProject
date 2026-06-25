@@ -39,24 +39,25 @@ async function search() {
 }
 
 async function getDangerLevels() {
-    dangerLevelStore.search({}, 1, null).then((response) => {
+    dangerLevelStore.search().then((response) => {
         dangerLevels.value = response.data
     })
 }
 
 async function getCountries() {
-    countryStore.search({}, 1, null).then((response) => {
+    countryStore.search().then((response) => {
         countries.value = response.data
     })
 }
 
 async function changeCountry(event: any){
     if(event.value && event.value.id){
-        cityStore.search({country_id: event.value.id}, 1, null).then((response) => {
+        cityStore.search({country_id: event.value.id}).then((response) => {
             cities.value = response.data
         })
     } else {
         cities.value = []
+        city.value = {}
     }
 }
 
@@ -103,7 +104,7 @@ onMounted(() => {
                 </Select>
             </FloatLabel>
             <FloatLabel>
-                <Select v-model="city" showClear :loading="cityStore.loading" :options="cities" optionLabel="name" fluid style="height: 42.5px;" />
+                <Select v-model="city" showClear :loading="countryStore.loading" :options="cities" optionLabel="name" fluid style="height: 42.5px;" />
                 <label for="city">{{ $t('City') }}</label>
             </FloatLabel>
             <Button label=" " icon="pi pi-search" severity="success" rounded aria-label="Search" :loading="reportStore.loading" @click="search()" />

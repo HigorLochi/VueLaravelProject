@@ -29,7 +29,7 @@ async function search() {
 }
 
 async function getCountries() {
-    countryStore.search({}, 1, null).then((response) => {
+    countryStore.search().then((response) => {
         countries.value = response.data
     })
 }
